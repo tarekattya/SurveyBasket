@@ -87,5 +87,21 @@
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SurveyBasket.Controllers.StudentController",
+    "Method": "test",
+    "RelativePath": "api/Student",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "student",
+        "Type": "SurveyBasket.Models.Student",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

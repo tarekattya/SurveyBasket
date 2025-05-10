@@ -37,3 +37,7 @@ F:\SurveyBasket\SurveyBasket\obj\Debug\net9.0\ref\SurveyBasket.dll
 F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Mapster.dll
 F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Mapster.Core.dll
 F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Mapster.DependencyInjection.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\FluentValidation.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\FluentValidation.DependencyInjectionExtensions.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\SharpGrip.FluentValidation.AutoValidation.Mvc.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\SharpGrip.FluentValidation.AutoValidation.Shared.dll

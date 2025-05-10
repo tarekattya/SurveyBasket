@@ -1,5 +1,7 @@
 ﻿
+using FluentValidation;
 using Mapster;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using SurveyBasket.Contracts.Requests;
 using SurveyBasket.Contracts.Responses;
 
@@ -33,10 +35,9 @@ namespace SurveyBasket.Controllers
         }
 
         [HttpPost("")]
-        public ActionResult Add(CreatePollRequest Request)
+        public ActionResult Add(CreatePollRequest Request ,[FromServices] IValidator<CreatePollRequest> Validator)
         {
             var NewPoll = _pollServices.Add(Request.Adapt<Poll>());
-
             return CreatedAtAction(nameof(Get), new { id = NewPoll.Id }, NewPoll);
         }
 
