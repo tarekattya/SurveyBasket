@@ -15,17 +15,33 @@ namespace SurveyBasket.Contracts.Validation.CreatePoll
                 .WithMessage("the Minimum of chars is {MinLength} and Maximum is {MaxLength} you enterd {TotalLength}");
                 ;
 
-            RuleFor(x => x.Description)
+            RuleFor(x => x.Summary)
                 .NotEmpty()
                 .WithMessage("u must add a {PropertyName}")
-                .Length(5,150)
+                .Length(3,1500)
                 .WithMessage("the Minimum of chars is {MinLength} and Maximum is {MaxLength} you enterd {TotalLength}");
 
+            RuleFor(x => x.StartsAt)
+                .NotEmpty()
+                .GreaterThanOrEqualTo(DateTime.Today);
+
+            RuleFor(x => x.EndsAt)
+                .NotEmpty();
+
+            RuleFor(x => x)
+                .Must(BeAValidDate)
+                .WithName(nameof(CreatePollRequest.EndsAt))
+                .WithMessage("{PropertyName} must be greater or equal StartsAt"); 
 
 
 
 
 
+        }
+
+        private bool BeAValidDate(CreatePollRequest poll)
+        {
+            return poll.EndsAt >= poll.StartsAt;
         }
     }
 }

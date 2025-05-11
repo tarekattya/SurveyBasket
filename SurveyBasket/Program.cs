@@ -2,13 +2,10 @@
 using FluentValidation;
 using Mapster;
 using MapsterMapper;
+using Microsoft.EntityFrameworkCore;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using SurveyBasket.Contracts.Requests;
-using SurveyBasket.Contracts.Validation.CreatePoll;
-using SurveyBasket.Repositories;
-using SurveyBasket.Repositories.IDEMO;
-using SurveyBasket.Services;
-using System.Reflection;
+
 
 namespace SurveyBasket
 {
@@ -17,19 +14,10 @@ namespace SurveyBasket
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-
-
-
-            builder.Services.Addservices();
-
           
-           
-            
+            builder.Services.Addservices(builder.Configuration);            
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();

@@ -2,7 +2,7 @@
 
 namespace SurveyBasket.Contracts.Requests
 {
-    public record CreatePollRequest(string Title , string Description) { }
+    public record CreatePollRequest(string Title , string Summary, bool IsPublished, DateTime StartsAt, DateTime EndsAt) { }
     
        
 

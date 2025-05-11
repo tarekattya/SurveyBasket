@@ -1,27 +1,39 @@
 ﻿using MapsterMapper;
-using SurveyBasket.Repositories.IDEMO;
-using SurveyBasket.Repositories;
 using System.Reflection;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
-using FluentValidation;
+using SurveyBasket.Presistence.DbContextt;
+using SurveyBasket.Services.NewFolder;
+
 
 namespace SurveyBasket
 {
     public static class DependancyInjection 
     {
 
-        public static IServiceCollection Addservices(this IServiceCollection services)
+        public static IServiceCollection Addservices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IPollRepo, PollRepo>();
-            services.AddScoped<PollServices>();
+            services.AddScoped<IPollServices, PollServices>();
+
+            
 
             services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             services.AddOpenApi();
 
 
             services.AddSMapsterservices();
             services.AddSFluentValidationservices();
+            services.AddDataBaseCon(configuration);
+
+            return services;
+        }
+
+        public static IServiceCollection AddDataBaseCon(this IServiceCollection services , IConfiguration configuration)
+        {
+
+            var ConnectionString = configuration.GetConnectionString("DefaultConnection") ??
+               throw new InvalidOperationException("Not founded as connectionstring");
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(ConnectionString));
 
             return services;
         }

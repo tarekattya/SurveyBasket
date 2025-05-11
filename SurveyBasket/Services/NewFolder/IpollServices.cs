@@ -1,18 +1,21 @@
-﻿using SurveyBasket.Model;
+﻿
+using System.Threading;
 
 namespace SurveyBasket.Services.NewFolder
 {
     public interface IPollServices
     {
-        public IEnumerable<Poll> GetAll();
+        public Task<IEnumerable<Poll>> GetAllAsync(CancellationToken cancellationToken);
 
-        public Poll? Get(int id);
+        public Task<Poll?> GetAsync(int id,CancellationToken cancellationToken);
 
-        public Poll Add(Poll poll);
+        public Task<Poll> AddAsync(Poll poll, CancellationToken cancellationToken);
 
-        public bool Update(int id, Poll poll);
+        public Task<bool> UpdateAsync(int id, Poll poll , CancellationToken cancellationToken);
 
-        public bool Delete(int id);
+        public Task<bool> DeleteAsync(int id , CancellationToken cancellationToken);
+
+        public Task<bool> TogglePublishAsync(int id, CancellationToken cancellationToken);
 
     }
 }
