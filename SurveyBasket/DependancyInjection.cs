@@ -3,6 +3,10 @@ using System.Reflection;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using SurveyBasket.Presistence.DbContextt;
 using SurveyBasket.Services.NewFolder;
+using SurveyBasket.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 
 namespace SurveyBasket
@@ -13,6 +17,7 @@ namespace SurveyBasket
         public static IServiceCollection Addservices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IPollServices, PollServices>();
+            services.AddScoped<IAuthService, AuthService>();
 
             
 
@@ -21,13 +26,14 @@ namespace SurveyBasket
 
 
             services.AddSMapsterservices();
+            services.AddIdentitityServices();
             services.AddSFluentValidationservices();
-            services.AddDataBaseCon(configuration);
+            services.AddDataBaseServices(configuration);
 
             return services;
         }
 
-        public static IServiceCollection AddDataBaseCon(this IServiceCollection services , IConfiguration configuration)
+         static IServiceCollection AddDataBaseServices(this IServiceCollection services , IConfiguration configuration)
         {
 
             var ConnectionString = configuration.GetConnectionString("DefaultConnection") ??
@@ -38,7 +44,7 @@ namespace SurveyBasket
             return services;
         }
 
-        public static IServiceCollection AddSMapsterservices(this IServiceCollection services)
+         static IServiceCollection AddSMapsterservices(this IServiceCollection services)
         {
             var config = TypeAdapterConfig.GlobalSettings;
             config.Scan(Assembly.GetExecutingAssembly());
@@ -48,7 +54,7 @@ namespace SurveyBasket
         }
 
 
-        public static IServiceCollection AddSFluentValidationservices(this IServiceCollection services)
+         static IServiceCollection AddSFluentValidationservices(this IServiceCollection services)
         {
             services
              .AddFluentValidationAutoValidation()
@@ -57,5 +63,45 @@ namespace SurveyBasket
             return services;
         }
 
+        static IServiceCollection AddIdentitityServices(this IServiceCollection services)
+        {
+
+            services.AddSingleton<IJWTprovider, JWTProvider>();
+            services
+             .AddIdentity<ApplicationUser, IdentityRole >()
+             .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(
+                o =>
+                {
+                    o.SaveToken = true;
+                    o.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("XDi9tvVcnu2BOJ7JSL1c0dcTVLW/9YkOuLs6gzQ4qSI=\r\n")),
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidAudience = "SurveyBasketApp",
+                        ValidIssuer = "SurveyBasket"
+
+                    };
+
+
+
+                });
+
+            
+
+            return services;
+        }
     }
 }

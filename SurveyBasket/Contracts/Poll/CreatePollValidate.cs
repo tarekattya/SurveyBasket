@@ -1,24 +1,24 @@
 ﻿using FluentValidation;
-using SurveyBasket.Contracts.Requests;
 
-namespace SurveyBasket.Contracts.Validation.CreatePoll
+namespace SurveyBasket.Contracts.Poll
 {
     public class CreatePollValidate : AbstractValidator<CreatePollRequest>
     {
-        public CreatePollValidate() {
+        public CreatePollValidate()
+        {
 
 
             RuleFor(x => x.Title)
                 .NotEmpty()
                 .WithMessage("u must add a {PropertyName}")
-                .Length(3,115)
+                .Length(3, 115)
                 .WithMessage("the Minimum of chars is {MinLength} and Maximum is {MaxLength} you enterd {TotalLength}");
-                ;
+            ;
 
             RuleFor(x => x.Summary)
                 .NotEmpty()
                 .WithMessage("u must add a {PropertyName}")
-                .Length(3,1500)
+                .Length(3, 1500)
                 .WithMessage("the Minimum of chars is {MinLength} and Maximum is {MaxLength} you enterd {TotalLength}");
 
             RuleFor(x => x.StartsAt)
@@ -31,7 +31,7 @@ namespace SurveyBasket.Contracts.Validation.CreatePoll
             RuleFor(x => x)
                 .Must(BeAValidDate)
                 .WithName(nameof(CreatePollRequest.EndsAt))
-                .WithMessage("{PropertyName} must be greater or equal StartsAt"); 
+                .WithMessage("{PropertyName} must be greater or equal StartsAt");
 
 
 

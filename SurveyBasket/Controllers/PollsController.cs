@@ -1,7 +1,8 @@
 ﻿
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using SurveyBasket.Contracts.Requests;
+using SurveyBasket.Contracts.Poll;
 using SurveyBasket.Services.NewFolder;
 using System.Threading;
 
@@ -17,6 +18,7 @@ namespace SurveyBasket.Controllers
         private readonly IPollServices _pollServices = pollServices;
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             var polls = await _pollServices.GetAllAsync(cancellationToken);

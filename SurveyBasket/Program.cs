@@ -4,7 +4,7 @@ using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
-using SurveyBasket.Contracts.Requests;
+using SurveyBasket.Presistence.DbContextt;
 
 
 namespace SurveyBasket
@@ -14,8 +14,10 @@ namespace SurveyBasket
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-          
-            builder.Services.Addservices(builder.Configuration);            
+
+            builder.Services.Addservices(builder.Configuration);
+            //builder.Services.AddIdentityApiEndpoints<ApplicationUser>().
+            //   AddEntityFrameworkStores<ApplicationDbContext>();
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
@@ -27,7 +29,7 @@ namespace SurveyBasket
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-             
+            //app.MapIdentityApi<ApplicationUser>();
 
             app.MapControllers();
 

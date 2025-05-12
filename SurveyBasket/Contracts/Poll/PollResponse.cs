@@ -1,6 +1,6 @@
-﻿namespace SurveyBasket.Contracts.Responses
+﻿namespace SurveyBasket.Contracts.Poll
 {
-    public record PollResponse(int id, string Title, string Summary , bool IsPublished, DateTime StartsAt, DateTime EndsAt)
+    public record PollResponse(int id, string Title, string Summary, bool IsPublished, DateTime StartsAt, DateTime EndsAt)
     {
         //public int Id { get; set; }
 

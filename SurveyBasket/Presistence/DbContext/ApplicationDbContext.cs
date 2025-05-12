@@ -1,11 +1,11 @@
 ﻿
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 namespace SurveyBasket.Presistence.DbContextt
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
-        }
+       
         public DbSet<Poll> Polls { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
