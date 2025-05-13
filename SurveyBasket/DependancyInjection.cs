@@ -86,12 +86,12 @@ namespace SurveyBasket
                     o.TokenValidationParameters = new TokenValidationParameters()
                     {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("XDi9tvVcnu2BOJ7JSL1c0dcTVLW/9YkOuLs6gzQ4qSI=\r\n")),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("XDi9tvVcnu2BOJ7JSL1c0dcTVLW/9YkOuLs6gzQ4qSI=")),
                         ValidateIssuer = true,
                         ValidateAudience = true,
                         ValidateLifetime = true,
-                        ValidAudience = "SurveyBasketApp",
-                        ValidIssuer = "SurveyBasket"
+                        ValidAudience = "SurveyBasket",
+                        ValidIssuer = "SurveyBasketApp"
 
                     };
 

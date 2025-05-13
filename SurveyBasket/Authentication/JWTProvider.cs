@@ -21,7 +21,7 @@ namespace SurveyBasket.Authentication
 
             };
 
-            var symmetricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("XDi9tvVcnu2BOJ7JSL1c0dcTVLW/9YkOuLs6gzQ4qSI=\r\n"));
+            var symmetricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("XDi9tvVcnu2BOJ7JSL1c0dcTVLW/9YkOuLs6gzQ4qSI="));
 
             var credentials = new SigningCredentials(symmetricKey, SecurityAlgorithms.HmacSha256);
 

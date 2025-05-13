@@ -20,7 +20,7 @@ namespace SurveyBasket.Services
 
             (string Token , int ExpireIn) =  _jWTprovider.GenerateToken(user);
 
-            return new AuthResponse(user.Id, user.Email, user.FirstName, user.LastName,Token , ExpireIn);
+            return new AuthResponse(user.Id, user.Email, user.FirstName, user.LastName,Token , ExpireIn*60  );
         }
     }
 }
