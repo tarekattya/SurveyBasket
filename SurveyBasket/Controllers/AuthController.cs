@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using SurveyBasket.Options;
 
 namespace SurveyBasket.Controllers
 {
@@ -16,6 +18,8 @@ namespace SurveyBasket.Controllers
 
             return AuthResult is null ? BadRequest("invalid EMAIL/PASSWORD") : Ok(AuthResult);
         }
+
+      
 
     }
 }

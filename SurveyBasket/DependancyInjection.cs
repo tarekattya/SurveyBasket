@@ -7,6 +7,7 @@ using SurveyBasket.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using SurveyBasket.Options;
 
 
 namespace SurveyBasket
@@ -19,19 +20,20 @@ namespace SurveyBasket
             services.AddScoped<IPollServices, PollServices>();
             services.AddScoped<IAuthService, AuthService>();
 
-            
+       
 
             services.AddControllers();
             services.AddOpenApi();
 
 
             services.AddSMapsterservices();
-            services.AddIdentitityServices();
+            services.AddIdentitityServices(configuration);
             services.AddSFluentValidationservices();
             services.AddDataBaseServices(configuration);
 
             return services;
         }
+
 
          static IServiceCollection AddDataBaseServices(this IServiceCollection services , IConfiguration configuration)
         {
@@ -63,13 +65,23 @@ namespace SurveyBasket
             return services;
         }
 
-        static IServiceCollection AddIdentitityServices(this IServiceCollection services)
+        static IServiceCollection AddIdentitityServices(this IServiceCollection services , IConfiguration configuration)
         {
 
-            services.AddSingleton<IJWTprovider, JWTProvider>();
             services
              .AddIdentity<ApplicationUser, IdentityRole >()
              .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+            services.AddSingleton<IJWTprovider, JWTProvider>();
+            //services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
+
+            services.AddOptions<JwtOptions>()
+                .BindConfiguration(JwtOptions.SectionName)
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
+
+            var JwtSettings = configuration.GetSection(JwtOptions.SectionName).Get<JwtOptions>();
 
 
 
@@ -86,12 +98,12 @@ namespace SurveyBasket
                     o.TokenValidationParameters = new TokenValidationParameters()
                     {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("XDi9tvVcnu2BOJ7JSL1c0dcTVLW/9YkOuLs6gzQ4qSI=")),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings!.Key)),
                         ValidateIssuer = true,
                         ValidateAudience = true,
                         ValidateLifetime = true,
-                        ValidAudience = "SurveyBasket",
-                        ValidIssuer = "SurveyBasketApp"
+                        ValidAudience =JwtSettings.Audience,
+                        ValidIssuer = JwtSettings.Issuer
 
                     };
 
@@ -99,7 +111,7 @@ namespace SurveyBasket
 
                 });
 
-            
+
 
             return services;
         }

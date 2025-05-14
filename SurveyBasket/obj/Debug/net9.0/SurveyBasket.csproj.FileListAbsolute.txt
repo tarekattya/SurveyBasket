@@ -179,3 +179,4 @@ F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.Enti
 F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
 F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
 F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Scalar.AspNetCore.dll

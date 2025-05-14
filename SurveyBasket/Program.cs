@@ -3,6 +3,7 @@ using FluentValidation;
 using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using SurveyBasket.Presistence.DbContextt;
 
@@ -14,7 +15,6 @@ namespace SurveyBasket
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
             builder.Services.Addservices(builder.Configuration);
             //builder.Services.AddIdentityApiEndpoints<ApplicationUser>().
             //   AddEntityFrameworkStores<ApplicationDbContext>();
@@ -24,6 +24,13 @@ namespace SurveyBasket
             {
                 app.MapOpenApi();
                 app.UseSwaggerUI(op => op.SwaggerEndpoint("/openapi/v1.json",""));
+                app.MapScalarApiReference(opt =>
+                {
+                    opt.Title = "Scalar Example";
+                    opt.Theme = ScalarTheme.Mars;
+                    opt.DefaultHttpClient = new(ScalarTarget.Http, ScalarClient.Http11);
+                });
+
             }
 
             app.UseHttpsRedirection();

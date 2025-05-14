@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("49c21e01-07db-43c4-b3a2-751fc092fef3")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("SurveyBasket")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fffd6b92fabc1828faa1faac04752b4e799c6c63")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+735ed30d5ccdf2dcb390a9819ed8d0024c808d3c")]
 [assembly: System.Reflection.AssemblyProductAttribute("SurveyBasket")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SurveyBasket")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

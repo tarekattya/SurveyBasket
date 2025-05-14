@@ -4,6 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>49c21e01-07db-43c4-b3a2-751fc092fef3</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +20,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Scalar.AspNetCore" Version="2.3.0" />
     <PackageReference Include="SharpGrip.FluentValidation.AutoValidation.Mvc" Version="1.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.1" />
   </ItemGroup>

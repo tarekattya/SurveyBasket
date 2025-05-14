@@ -1,13 +1,18 @@
 ﻿
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using SurveyBasket.Options;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
 namespace SurveyBasket.Authentication
 {
-    public class JWTProvider : IJWTprovider
+    public class JWTProvider(IOptions<JwtOptions> options) : IJWTprovider
     {
+        private readonly JwtOptions _options = options.Value;
+
+        
         public (string token, int Expirein) GenerateToken(ApplicationUser user)
         {
             Claim[] claims = new Claim[] {
@@ -20,22 +25,18 @@ namespace SurveyBasket.Authentication
 
 
             };
-
-            var symmetricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("XDi9tvVcnu2BOJ7JSL1c0dcTVLW/9YkOuLs6gzQ4qSI="));
-
+            var symmetricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Key));
             var credentials = new SigningCredentials(symmetricKey, SecurityAlgorithms.HmacSha256);
 
-            var ExpierIN = 30;
-
             var token = new JwtSecurityToken(
-                issuer: "SurveyBasketApp",
-                audience: "SurveyBasket",
+                issuer: _options.Issuer,
+                audience: _options.Audience,
                 claims: claims,
                 signingCredentials: credentials,
-                expires: DateTime.UtcNow.AddMinutes(ExpierIN)
+                expires: DateTime.UtcNow.AddMinutes(_options.ExpireTime)
             );
 
-            return (token: new JwtSecurityTokenHandler().WriteToken(token), Expirein: ExpierIN);
+            return (token: new JwtSecurityTokenHandler().WriteToken(token), Expirein: _options.ExpireTime);
         }
     }
 

@@ -18,7 +18,7 @@ namespace SurveyBasket.Controllers
     {
         private readonly IPollServices _pollServices = pollServices;
 
-        [HttpGet("")]
+        [HttpGet]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             var polls = await _pollServices.GetAllAsync(cancellationToken);

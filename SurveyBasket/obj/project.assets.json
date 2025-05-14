@@ -1145,6 +1145,22 @@
           "buildTransitive/Mono.TextTemplating.targets": {}
         }
       },
+      "Scalar.AspNetCore/2.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Scalar.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Scalar.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "SharpGrip.FluentValidation.AutoValidation.Mvc/1.5.0": {
         "type": "package",
         "dependencies": {
@@ -3810,6 +3826,23 @@
         "readme.md"
       ]
     },
+    "Scalar.AspNetCore/2.3.0": {
+      "sha512": "uC+lEJWXNnjHwTRYCK7hJweCN9CYGs9HZ5vx4l+uQEdkXvHE9ZXcxfvKWn7GZ6pVQFwCTKt/HPfE2bpJd/C6aQ==",
+      "type": "package",
+      "path": "scalar.aspnetcore/2.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net8.0/Scalar.AspNetCore.dll",
+        "lib/net8.0/Scalar.AspNetCore.xml",
+        "lib/net9.0/Scalar.AspNetCore.dll",
+        "lib/net9.0/Scalar.AspNetCore.xml",
+        "scalar.aspnetcore.2.3.0.nupkg.sha512",
+        "scalar.aspnetcore.nuspec"
+      ]
+    },
     "SharpGrip.FluentValidation.AutoValidation.Mvc/1.5.0": {
       "sha512": "gqzRTuyZSn8eGbOg0OVQIY9mHCW78WMq1sLg+tqTDQVZJC/clbi9g9AV0ErZj1PZfuGIqG35cBo32Px0MVW5Ow==",
       "type": "package",
@@ -4905,6 +4938,7 @@
       "Microsoft.EntityFrameworkCore >= 9.0.4",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.4",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.4",
+      "Scalar.AspNetCore >= 2.3.0",
       "SharpGrip.FluentValidation.AutoValidation.Mvc >= 1.5.0",
       "Swashbuckle.AspNetCore.SwaggerUI >= 8.1.1"
     ]
@@ -4997,6 +5031,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[9.0.4, )"
+          },
+          "Scalar.AspNetCore": {
+            "target": "Package",
+            "version": "[2.3.0, )"
           },
           "SharpGrip.FluentValidation.AutoValidation.Mvc": {
             "target": "Package",

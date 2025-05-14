@@ -17,6 +17,7 @@
           "Microsoft.EntityFrameworkCore": "9.0.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.4",
           "Microsoft.EntityFrameworkCore.Tools": "9.0.4",
+          "Scalar.AspNetCore": "2.3.0",
           "SharpGrip.FluentValidation.AutoValidation.Mvc": "1.5.0",
           "Swashbuckle.AspNetCore.SwaggerUI": "8.1.1"
         },
@@ -875,6 +876,14 @@
           }
         }
       },
+      "Scalar.AspNetCore/2.3.0": {
+        "runtime": {
+          "lib/net9.0/Scalar.AspNetCore.dll": {
+            "assemblyVersion": "2.3.0.0",
+            "fileVersion": "2.3.0.0"
+          }
+        }
+      },
       "SharpGrip.FluentValidation.AutoValidation.Mvc/1.5.0": {
         "dependencies": {
           "SharpGrip.FluentValidation.AutoValidation.Shared": "1.5.0"
@@ -1554,6 +1563,13 @@
       "sha512": "sha512-YqueG52R/Xej4VVbKuRIodjiAhV0HR/XVbLbNrJhCZnzjnSjgMJ/dCdV0akQQxavX6hp/LC6rqLGLcXeQYU7XA==",
       "path": "mono.texttemplating/3.0.0",
       "hashPath": "mono.texttemplating.3.0.0.nupkg.sha512"
+    },
+    "Scalar.AspNetCore/2.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uC+lEJWXNnjHwTRYCK7hJweCN9CYGs9HZ5vx4l+uQEdkXvHE9ZXcxfvKWn7GZ6pVQFwCTKt/HPfE2bpJd/C6aQ==",
+      "path": "scalar.aspnetcore/2.3.0",
+      "hashPath": "scalar.aspnetcore.2.3.0.nupkg.sha512"
     },
     "SharpGrip.FluentValidation.AutoValidation.Mvc/1.5.0": {
       "type": "package",
