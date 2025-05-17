@@ -101,7 +101,7 @@
   },
   {
     "ContainingType": "SurveyBasket.Controllers.AuthController",
-    "Method": "Login",
+    "Method": "LoginAsync",
     "RelativePath": "Auth",
     "HttpMethod": "POST",
     "IsController": true,
@@ -110,6 +110,38 @@
       {
         "Name": "requst",
         "Type": "SurveyBasket.Contracts.Authentication.AuthRequst",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SurveyBasket.Controllers.AuthController",
+    "Method": "RefreshAsync",
+    "RelativePath": "Auth/Refresh",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tokenRequest",
+        "Type": "SurveyBasket.Contracts.Authentication.RefreshTokenRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SurveyBasket.Controllers.AuthController",
+    "Method": "RevokeRefreshAsync",
+    "RelativePath": "Auth/Revoke-refresh-token",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tokenRequest",
+        "Type": "SurveyBasket.Contracts.Authentication.RefreshTokenRequest",
         "IsRequired": true
       }
     ],
