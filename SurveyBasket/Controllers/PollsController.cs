@@ -2,6 +2,7 @@
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using SurveyBasket.Contracts.Authentication;
 using SurveyBasket.Contracts.Poll;
 using SurveyBasket.Presistence.Entites;
 using SurveyBasket.Services.NewFolder;
@@ -29,13 +30,13 @@ namespace SurveyBasket.Controllers
         public async Task<IActionResult> Get(int id,CancellationToken cancellationToken)
         {
             var poll = await _pollServices.GetAsync(id, cancellationToken);
-            return poll.IsSuccess ? Ok(poll.Value) : Problem(statusCode:StatusCodes.Status400BadRequest , title:poll.Error.Code , detail:poll.Error.Description);
+            return poll.IsSuccess ? Ok(poll.Value) : poll.ToProblem(StatusCodes.Status400BadRequest);
 
         }
 
         [HttpPost("")]
         public async Task<IActionResult> Add(PollRequest Request, CancellationToken cancellationToken, [FromServices] IValidator<PollRequest> Validator)
-        {
+        {   
             var NewPoll = await _pollServices.AddAsync(Request, cancellationToken);
             return CreatedAtAction(nameof(Get), new { ID = NewPoll.Value.id }, NewPoll);
         }
@@ -47,21 +48,21 @@ namespace SurveyBasket.Controllers
         {
             var result = await _pollServices.UpdateAsync(id, Request, cancellationToken);
             
-            return result.IsSuccess? NoContent() : Problem(statusCode: StatusCodes.Status400BadRequest, title: result.Error.Code, detail: result.Error.Description);
+            return result.IsSuccess? NoContent() : result.ToProblem(StatusCodes.Status400BadRequest);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
             var IsDeleted = await _pollServices.DeleteAsync(id, cancellationToken);
-            return IsDeleted.IsSuccess? NoContent() : Problem(statusCode: StatusCodes.Status400BadRequest, title: IsDeleted.Error.Code, detail: IsDeleted.Error.Description);
+            return IsDeleted.IsSuccess? NoContent() : IsDeleted.ToProblem(StatusCodes.Status400BadRequest);
         }
         [AllowAnonymous]
         [HttpPut("{id}/togglePublish")]
         public async Task<IActionResult> TogglePublish(int id, CancellationToken cancellationToken)
         {
             var IsUpdated = await _pollServices.TogglePublishAsync(id, cancellationToken);
-            return IsUpdated.IsSuccess ? NoContent() : Problem(statusCode: StatusCodes.Status400BadRequest, title: IsUpdated.Error.Code, detail: IsUpdated.Error.Description);
+            return IsUpdated.IsSuccess ? NoContent() : IsUpdated.ToProblem(StatusCodes.Status400BadRequest);
         }
 
     }
