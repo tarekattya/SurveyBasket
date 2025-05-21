@@ -2,9 +2,9 @@
 
 namespace SurveyBasket.Contracts.Poll
 {
-    public class CreatePollValidate : AbstractValidator<CreatePollRequest>
+    public class PollValidate : AbstractValidator<PollRequest>
     {
-        public CreatePollValidate()
+        public PollValidate()
         {
 
 
@@ -30,7 +30,7 @@ namespace SurveyBasket.Contracts.Poll
 
             RuleFor(x => x)
                 .Must(BeAValidDate)
-                .WithName(nameof(CreatePollRequest.EndsAt))
+                .WithName(nameof(PollRequest.EndsAt))
                 .WithMessage("{PropertyName} must be greater or equal StartsAt");
 
 
@@ -39,7 +39,7 @@ namespace SurveyBasket.Contracts.Poll
 
         }
 
-        private bool BeAValidDate(CreatePollRequest poll)
+        private bool BeAValidDate(PollRequest poll)
         {
             return poll.EndsAt >= poll.StartsAt;
         }

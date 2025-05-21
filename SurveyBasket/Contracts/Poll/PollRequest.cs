@@ -2,10 +2,10 @@
 
 namespace SurveyBasket.Contracts.Poll
 {
-    public record CreatePollRequest(string Title, string Summary, bool IsPublished, DateTime StartsAt, DateTime EndsAt) { }
+    public record PollRequest(string Title, string Summary, DateTime StartsAt, DateTime EndsAt) { }
 
 
-
+    
 
     //public static  implicit operator Poll(CreatePollRequest request)
     //{

@@ -8,48 +8,70 @@ namespace SurveyBasket.Services
     {
         private readonly ApplicationDbContext _context = context;
 
-        
 
-        public async Task<IEnumerable<Poll>> GetAllAsync(CancellationToken cancellationToken) => await _context.Polls.AsNoTracking().ToListAsync();
-        public async Task<Poll?> GetAsync(int id,CancellationToken cancellationToken) => await _context.Polls.FindAsync(id);
-        public async Task<Poll> AddAsync(Poll poll, CancellationToken cancellationToken) {
-            await _context.Polls.AddAsync(poll,cancellationToken);
+
+        public async Task<Result<IEnumerable<PollResponse>>> GetAllAsync(CancellationToken cancellationToken) 
+        { 
+            
+            
+           var polls = await _context.Polls.AsNoTracking().ToListAsync();
+            var result = polls.Adapt<IEnumerable<PollResponse>>();
+            if (result is not null)
+                return Result.Success(result);
+            return Result.Failure<IEnumerable<PollResponse>>(PollError.PollNotFound);
+
+        }
+        public async Task<Result<PollResponse>> GetAsync(int id, CancellationToken cancellationToken)
+        {
+           var poll = await _context.Polls.FindAsync(id , cancellationToken);
+            
+            if (poll is not null)
+                return Result.Success(poll.Adapt<PollResponse>());
+            return Result.Failure<PollResponse>(PollError.PollNotFound);
+
+
+
+        }
+        public async Task<Result<PollResponse>> AddAsync(PollRequest request, CancellationToken cancellationToken) {
+            var poll = request.Adapt<Poll>();
+           await _context.Polls.AddAsync(poll, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
-            return poll;
+            var response = poll.Adapt<PollResponse>();
+            return Result.Success<PollResponse>(response);
         }
 
-        public async Task<bool> UpdateAsync(int id, Poll poll, CancellationToken cancellationToken)
+        public async Task<Result> UpdateAsync(int id, PollRequest poll, CancellationToken cancellationToken)
         {
-            var currentPOll = await GetAsync(id,cancellationToken);
+            var currentPOll = await _context.Polls.FindAsync(id,cancellationToken);
             if (currentPOll is null)
-                return false;
+                return Result.Failure(PollError.PollNotFound);
             currentPOll.Title = poll.Title;
             currentPOll.Summary = poll.Summary;
             currentPOll.EndsAt = poll.EndsAt;
             currentPOll.StartsAt = poll.StartsAt;
             await _context.SaveChangesAsync(cancellationToken);
-            return true;
+            return Result.Success();
         }
 
-        public async Task<bool> DeleteAsync(int id, CancellationToken cancellationToken)
+        public async Task<Result> DeleteAsync(int id, CancellationToken cancellationToken)
         {
-            var currentPoll = await GetAsync(id, cancellationToken);
+            var currentPoll = await _context.Polls.FindAsync(id, cancellationToken);
             if (currentPoll is null)
-                return false;
+                return Result.Failure(PollError.PollNotFound);
             _context.Polls.Remove(currentPoll);
             await _context.SaveChangesAsync(cancellationToken);
-            return true;
+            return Result.Success();
         }
 
-        public async Task<bool> TogglePublishAsync(int id,CancellationToken cancellationToken)
+        public async Task<Result> TogglePublishAsync(int id, CancellationToken cancellationToken)
         {
-            var currentPOll = await GetAsync(id, cancellationToken);
+            var currentPOll = await _context.Polls.FindAsync(id, cancellationToken);
             if (currentPOll is null)
-                return false;
+                return Result.Failure(PollError.PollNotFound);
 
             currentPOll.IsPublished = !currentPOll.IsPublished;
             await _context.SaveChangesAsync(cancellationToken);
-            return true;
+            return Result.Success();
         }
     }
 

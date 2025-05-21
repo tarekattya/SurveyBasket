@@ -15,4 +15,7 @@ global using Microsoft.AspNetCore.Identity;
 global using SurveyBasket.Services;
 global using SurveyBasket.Contracts.Poll;
 global using SurveyBasket.Contracts.Authentication;
+global using SurveyBasket.Abstractions;
+global using SurveyBasket.Errors;
+
 

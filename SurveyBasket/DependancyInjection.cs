@@ -55,8 +55,13 @@ namespace SurveyBasket
             return services;
         }
 
+        static IServiceCollection AddCORSservices(this IServiceCollection services)
+        {
+            services.AddCors(opt => opt.AddDefaultPolicy(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()) );  
+            return services;
+        }
 
-         static IServiceCollection AddSFluentValidationservices(this IServiceCollection services)
+        static IServiceCollection AddSFluentValidationservices(this IServiceCollection services)
         {
             services
              .AddFluentValidationAutoValidation()

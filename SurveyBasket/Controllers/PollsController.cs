@@ -3,6 +3,7 @@ using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using SurveyBasket.Contracts.Poll;
+using SurveyBasket.Presistence.Entites;
 using SurveyBasket.Services.NewFolder;
 using System.Threading;
 
@@ -22,52 +23,45 @@ namespace SurveyBasket.Controllers
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             var polls = await _pollServices.GetAllAsync(cancellationToken);
-            var response = polls.Adapt<IEnumerable<PollResponse>>();
-            return Ok(response);
+            return Ok(polls);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id,CancellationToken cancellationToken)
         {
             var poll = await _pollServices.GetAsync(id, cancellationToken);
-            if (poll is null)
-                return NotFound();
-            var response = poll.Adapt<PollResponse>();
-            return Ok(response);
+            return poll.IsSuccess ? Ok(poll.Value) : Problem(statusCode:StatusCodes.Status400BadRequest , title:poll.Error.Code , detail:poll.Error.Description);
+
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> Add(CreatePollRequest Request,  CancellationToken cancellationToken, [FromServices] IValidator<CreatePollRequest> Validator )
+        public async Task<IActionResult> Add(PollRequest Request, CancellationToken cancellationToken, [FromServices] IValidator<PollRequest> Validator)
         {
-            var NewPoll = await _pollServices.AddAsync(Request.Adapt<Poll>(),  cancellationToken);
-            return CreatedAtAction(nameof(Get), new { id = NewPoll.Id }, NewPoll);
+            var NewPoll = await _pollServices.AddAsync(Request, cancellationToken);
+            return CreatedAtAction(nameof(Get), new { ID = NewPoll.Value.id }, NewPoll);
         }
 
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, CreatePollRequest Request , CancellationToken cancellationToken)
+        public async Task<IActionResult> Update(int id, PollRequest Request, CancellationToken cancellationToken)
         {
-            var IsUpdated =await _pollServices.UpdateAsync(id, Request.Adapt<Poll>(),cancellationToken);
-            if (!IsUpdated)
-                return NotFound();
-            return NoContent();
+            var result = await _pollServices.UpdateAsync(id, Request, cancellationToken);
+            
+            return result.IsSuccess? NoContent() : Problem(statusCode: StatusCodes.Status400BadRequest, title: result.Error.Code, detail: result.Error.Description);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id , CancellationToken cancellationToken)
+        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
-            var IsDeleted =await _pollServices.DeleteAsync(id,cancellationToken);
-            if (!IsDeleted)
-                return NotFound();
-            return NoContent();
+            var IsDeleted = await _pollServices.DeleteAsync(id, cancellationToken);
+            return IsDeleted.IsSuccess? NoContent() : Problem(statusCode: StatusCodes.Status400BadRequest, title: IsDeleted.Error.Code, detail: IsDeleted.Error.Description);
         }
-        [HttpPut("{id}/TogglePublish")]
-        public async Task<IActionResult> TogglePublish(int id, CreatePollRequest Request, CancellationToken cancellationToken)
+        [AllowAnonymous]
+        [HttpPut("{id}/togglePublish")]
+        public async Task<IActionResult> TogglePublish(int id, CancellationToken cancellationToken)
         {
-            var IsUpdated = await _pollServices.TogglePublishAsync(id,cancellationToken);
-            if (!IsUpdated)
-                return NotFound();
-            return NoContent();
+            var IsUpdated = await _pollServices.TogglePublishAsync(id, cancellationToken);
+            return IsUpdated.IsSuccess ? NoContent() : Problem(statusCode: StatusCodes.Status400BadRequest, title: IsUpdated.Error.Code, detail: IsUpdated.Error.Description);
         }
 
     }

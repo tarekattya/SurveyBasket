@@ -1,6 +1,6 @@
 ﻿namespace SurveyBasket.Presistence.Entites
 {
-    public class Poll
+    public class Poll : AuditableEntity
     {
         public int Id { get; set; }
 
