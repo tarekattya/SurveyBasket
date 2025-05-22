@@ -18,23 +18,28 @@ namespace SurveyBasket.Services
             var result = polls.Adapt<IEnumerable<PollResponse>>();
             if (result is not null)
                 return Result.Success(result);
-            return Result.Failure<IEnumerable<PollResponse>>(PollError.PollNotFound);
+            return Result.Failure<IEnumerable<PollResponse>>(PollErrors.PollNotFound);
 
         }
         public async Task<Result<PollResponse>> GetAsync(int id, CancellationToken cancellationToken)
         {
+
+
            var poll = await _context.Polls.FindAsync(id , cancellationToken);
-            
+
             if (poll is not null)
                 return Result.Success(poll.Adapt<PollResponse>());
-            return Result.Failure<PollResponse>(PollError.PollNotFound);
+            return Result.Failure<PollResponse>(PollErrors.PollNotFound);
 
 
 
         }
         public async Task<Result<PollResponse>> AddAsync(PollRequest request, CancellationToken cancellationToken) {
             var poll = request.Adapt<Poll>();
-           await _context.Polls.AddAsync(poll, cancellationToken);
+            var IsExists = await _context.Polls.AnyAsync(x => x.Title == request.Title, cancellationToken);
+            if (IsExists)
+                return Result.Failure<PollResponse>(PollErrors.DublicateTitles);
+            await _context.Polls.AddAsync(poll, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
             var response = poll.Adapt<PollResponse>();
             return Result.Success<PollResponse>(response);
@@ -44,7 +49,10 @@ namespace SurveyBasket.Services
         {
             var currentPOll = await _context.Polls.FindAsync(id,cancellationToken);
             if (currentPOll is null)
-                return Result.Failure(PollError.PollNotFound);
+                return Result.Failure(PollErrors.PollNotFound);
+            var IsExists = await _context.Polls.AnyAsync(x => x.Title == poll.Title, cancellationToken);
+            if (IsExists)
+                return Result.Failure<PollResponse>(PollErrors.DublicateTitles);
             currentPOll.Title = poll.Title;
             currentPOll.Summary = poll.Summary;
             currentPOll.EndsAt = poll.EndsAt;
@@ -57,7 +65,7 @@ namespace SurveyBasket.Services
         {
             var currentPoll = await _context.Polls.FindAsync(id, cancellationToken);
             if (currentPoll is null)
-                return Result.Failure(PollError.PollNotFound);
+                return Result.Failure(PollErrors.PollNotFound);
             _context.Polls.Remove(currentPoll);
             await _context.SaveChangesAsync(cancellationToken);
             return Result.Success();
@@ -67,7 +75,7 @@ namespace SurveyBasket.Services
         {
             var currentPOll = await _context.Polls.FindAsync(id, cancellationToken);
             if (currentPOll is null)
-                return Result.Failure(PollError.PollNotFound);
+                return Result.Failure(PollErrors.PollNotFound);
 
             currentPOll.IsPublished = !currentPOll.IsPublished;
             await _context.SaveChangesAsync(cancellationToken);

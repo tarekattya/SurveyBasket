@@ -20,16 +20,24 @@ namespace SurveyBasket
             services.AddScoped<IPollServices, PollServices>();
             services.AddScoped<IAuthService, AuthService>();
 
-       
+            
+
 
             services.AddControllers();
             services.AddOpenApi();
 
 
+
+
+
+            services.AddExceptionHandler<GlobalExecptionsHandler>();
+            services.AddProblemDetails();
+
             services.AddSMapsterservices();
             services.AddIdentitityServices(configuration);
             services.AddSFluentValidationservices();
             services.AddDataBaseServices(configuration);
+
 
             return services;
         }

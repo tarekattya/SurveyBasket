@@ -37,8 +37,9 @@ namespace SurveyBasket.Controllers
         [HttpPost("")]
         public async Task<IActionResult> Add(PollRequest Request, CancellationToken cancellationToken, [FromServices] IValidator<PollRequest> Validator)
         {   
-            var NewPoll = await _pollServices.AddAsync(Request, cancellationToken);
-            return CreatedAtAction(nameof(Get), new { ID = NewPoll.Value.id }, NewPoll);
+            var result = await _pollServices.AddAsync(Request, cancellationToken);
+
+            return result.IsSuccess ? CreatedAtAction(nameof(Get), new { ID = result.Value.id }, result) : result.ToProblem(StatusCodes.Status409Conflict);
         }
 
 
@@ -47,8 +48,8 @@ namespace SurveyBasket.Controllers
         public async Task<IActionResult> Update(int id, PollRequest Request, CancellationToken cancellationToken)
         {
             var result = await _pollServices.UpdateAsync(id, Request, cancellationToken);
-            
-            return result.IsSuccess? NoContent() : result.ToProblem(StatusCodes.Status400BadRequest);
+
+            return result.IsSuccess? NoContent() : result.ToProblem(StatusCodes.Status409Conflict);
         }
 
         [HttpDelete("{id}")]
