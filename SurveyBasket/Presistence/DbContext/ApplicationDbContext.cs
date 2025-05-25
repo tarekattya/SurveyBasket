@@ -8,14 +8,21 @@ namespace SurveyBasket.Presistence.DbContextt
     {
         private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
+        public DbSet<Answer> Answers { get; set; } = null!;
         public DbSet<Poll> Polls { get; set; } = null!;
+        public DbSet<Question> Questions { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
 
+            var cascadeFKs = modelBuilder.Model.GetEntityTypes()
+                .SelectMany(e => e.GetForeignKeys())
+                .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
 
+            foreach (var fk in cascadeFKs)
+                fk.DeleteBehavior = DeleteBehavior.Restrict;
 
         }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

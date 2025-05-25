@@ -13,6 +13,8 @@
 
         public DateTime EndsAt { get; set; } = DateTime.UtcNow;
 
+        public ICollection<Question> Questions { get; set; } = [];
+
 
     }
 

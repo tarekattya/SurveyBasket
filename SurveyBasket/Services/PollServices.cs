@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SurveyBasket.Presistence.DbContextt;
-using SurveyBasket.Services.NewFolder;
+﻿using SurveyBasket.Presistence.DbContextt;
 
 namespace SurveyBasket.Services
 {

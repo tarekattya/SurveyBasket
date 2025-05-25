@@ -9,7 +9,7 @@
         public ApplicationUser CreatedBy { get; set; } = default!;
         public ApplicationUser? UpdatedBy { get; set; }
 
-        public bool IsDeleted { get; set; } = false;
+
 
 
     }

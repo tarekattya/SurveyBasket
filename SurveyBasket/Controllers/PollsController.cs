@@ -1,12 +1,5 @@
 ﻿
-using Mapster;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using SurveyBasket.Contracts.Authentication;
-using SurveyBasket.Contracts.Poll;
-using SurveyBasket.Presistence.Entites;
-using SurveyBasket.Services.NewFolder;
-using System.Threading;
+
 
 namespace SurveyBasket.Controllers
 
@@ -39,7 +32,14 @@ namespace SurveyBasket.Controllers
         {   
             var result = await _pollServices.AddAsync(Request, cancellationToken);
 
-            return result.IsSuccess ? CreatedAtAction(nameof(Get), new { ID = result.Value.id }, result) : result.ToProblem(StatusCodes.Status409Conflict);
+            if (result.IsSuccess)
+              return  CreatedAtAction(nameof(Get), new { ID = result.Value.id }, result.Value);
+
+
+            return result.Error.Equals(PollErrors.DublicateTitles) ? 
+                 result.ToProblem(StatusCodes.Status409Conflict) 
+                 :
+                 result.ToProblem(StatusCodes.Status404NotFound);
         }
 
 
@@ -49,7 +49,14 @@ namespace SurveyBasket.Controllers
         {
             var result = await _pollServices.UpdateAsync(id, Request, cancellationToken);
 
-            return result.IsSuccess? NoContent() : result.ToProblem(StatusCodes.Status409Conflict);
+            if (result.IsSuccess)
+                return NoContent();
+
+
+            return result.Error.Equals(PollErrors.DublicateTitles) ?
+                 result.ToProblem(StatusCodes.Status409Conflict)
+                 :
+                 result.ToProblem(StatusCodes.Status404NotFound);
         }
 
         [HttpDelete("{id}")]

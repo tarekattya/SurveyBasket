@@ -2,7 +2,6 @@
 using System.Reflection;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using SurveyBasket.Presistence.DbContextt;
-using SurveyBasket.Services.NewFolder;
 using SurveyBasket.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -19,6 +18,7 @@ namespace SurveyBasket
         {
             services.AddScoped<IPollServices, PollServices>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IQuestionService, QuestionService>();
 
             
 

@@ -1,7 +1,7 @@
 ﻿
 using System.Threading;
 
-namespace SurveyBasket.Services.NewFolder
+namespace SurveyBasket.Services.Abstractions
 {
     public interface IPollServices
     {
