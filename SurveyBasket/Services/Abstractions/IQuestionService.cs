@@ -4,6 +4,7 @@
     {
 
         Task<Result<IEnumerable<QuestionResponse>>> GetAllAsync(int Pollid, CancellationToken cancellationToken = default);
+        Task<Result<IEnumerable<QuestionResponse>>> GetAvaliableAll(int Pollid,string UserId, CancellationToken cancellationToken = default);
 
         Task<Result<QuestionResponse>> GetAsync(int Pollid, int id, CancellationToken cancellationToken = default);
 

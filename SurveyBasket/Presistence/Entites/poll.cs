@@ -14,6 +14,7 @@
         public DateTime EndsAt { get; set; } = DateTime.UtcNow;
 
         public ICollection<Question> Questions { get; set; } = [];
+        public ICollection<Vote> Votes { get; set; } = [];
 
 
     }

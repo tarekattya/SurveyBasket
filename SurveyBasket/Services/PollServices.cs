@@ -8,17 +8,21 @@ namespace SurveyBasket.Services
 
 
 
-        public async Task<Result<IEnumerable<PollResponse>>> GetAllAsync(CancellationToken cancellationToken) 
-        { 
-            
-            
-           var polls = await _context.Polls.AsNoTracking().ToListAsync();
-            var result = polls.Adapt<IEnumerable<PollResponse>>();
-            if (result is not null)
-                return Result.Success(result);
-            return Result.Failure<IEnumerable<PollResponse>>(PollErrors.PollNotFound);
+        public async Task<IEnumerable<PollResponse>> GetAllAsync(CancellationToken cancellationToken) 
+        =>   await _context.Polls
+                .AsNoTracking()
+                .ProjectToType<PollResponse>()
+                .ToListAsync(cancellationToken);
 
-        }
+
+
+        public async Task<IEnumerable<PollResponse>> GetCurrentAsync(CancellationToken cancellationToken)
+       => await _context.Polls
+                .Where(p => p.IsPublished && p.StartsAt <= DateTime.UtcNow && p.EndsAt >= DateTime.UtcNow)
+               .AsNoTracking()
+               .ProjectToType<PollResponse>()
+               .ToListAsync(cancellationToken);
+
         public async Task<Result<PollResponse>> GetAsync(int id, CancellationToken cancellationToken)
         {
 
@@ -48,7 +52,7 @@ namespace SurveyBasket.Services
             var currentPOll = await _context.Polls.FindAsync(id,cancellationToken);
             if (currentPOll is null)
                 return Result.Failure(PollErrors.PollNotFound);
-            var IsExists = await _context.Polls.AnyAsync(x => x.Title == poll.Title, cancellationToken);
+            var IsExists = await _context.Polls.AnyAsync( x => x.Id != id && x.Title == poll.Title, cancellationToken);
             if (IsExists)
                 return Result.Failure<PollResponse>(PollErrors.DublicateTitles);
             currentPOll.Title = poll.Title;

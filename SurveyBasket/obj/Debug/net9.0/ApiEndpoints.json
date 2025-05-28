@@ -200,6 +200,53 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "SurveyBasket.Controllers.VotesController",
+    "Method": "Start",
+    "RelativePath": "api/polls/{pollId}/vote",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pollId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SurveyBasket.Controllers.VotesController",
+    "Method": "Vote",
+    "RelativePath": "api/polls/{pollId}/vote",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pollId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "SurveyBasket.Contracts.Vote.VoteRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SurveyBasket.Controllers.PollsController",
+    "Method": "GetCurrent",
+    "RelativePath": "api/Polls/current",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SurveyBasket.Controllers.AuthController",
     "Method": "LoginAsync",
     "RelativePath": "Auth",

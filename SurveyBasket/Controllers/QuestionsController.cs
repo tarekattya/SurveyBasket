@@ -18,7 +18,7 @@ namespace SurveyBasket.Controllers
             var result = await _questionService.GetAllAsync(pollId, cancellationToken);
             if (result.IsSuccess)
                 return Ok(result.Value);
-            return result.ToProblem(StatusCodes.Status404NotFound);
+            return result.ToProblem();
 
 
         }
@@ -29,7 +29,7 @@ namespace SurveyBasket.Controllers
             var result = await _questionService.GetAsync(pollId, id, cancellationToken);
             if (result.IsSuccess)
                 return Ok(result.Value);
-            return result.ToProblem(StatusCodes.Status404NotFound);
+            return result.ToProblem();
         }
 
         [HttpPost("")]
@@ -38,13 +38,10 @@ namespace SurveyBasket.Controllers
             var result = await _questionService.AddAsync(pollId, request, cancellationToken);
 
             if (result.IsSuccess)
-                return CreatedAtAction(nameof(Get), new { pollId, result.Value.id }, result.Value);
+                return CreatedAtAction(nameof(Get), new { pollId, result.Value.Id }, result.Value);
 
 
-            return result.Error.Equals(QuestionErrors.DublicateContent) ?
-                 result.ToProblem(StatusCodes.Status409Conflict)
-                 :
-                 result.ToProblem(StatusCodes.Status404NotFound);
+            return result.ToProblem();
         }
 
 
@@ -57,10 +54,8 @@ namespace SurveyBasket.Controllers
                 return NoContent();
 
 
-            return result.Error.Equals(QuestionErrors.DublicateContent) ?
-                 result.ToProblem(StatusCodes.Status409Conflict)
-                 :
-                 result.ToProblem(StatusCodes.Status404NotFound);
+            return result.ToProblem();
+
         }
 
         [HttpPut("{id}/ToggleStatus")]
@@ -69,7 +64,7 @@ namespace SurveyBasket.Controllers
             var result = await _questionService.ToggleStatus(pollId, id, cancellationToken);
             if (result.IsSuccess)
                 return NoContent();
-            return result.ToProblem(StatusCodes.Status404NotFound);
+            return result.ToProblem();
 
         }
     }

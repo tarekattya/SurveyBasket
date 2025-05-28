@@ -19,7 +19,7 @@ namespace SurveyBasket.Authentication
 
                 new Claim(JwtRegisteredClaimNames.Sub  , user.Id),
                 new Claim(JwtRegisteredClaimNames.Email  , user.Email!),
-                new Claim(JwtRegisteredClaimNames.Name  , user.LastName),
+                new Claim(JwtRegisteredClaimNames.Name  , user.FirstName),
                 new Claim(JwtRegisteredClaimNames.FamilyName  , user.LastName),
                 new Claim(JwtRegisteredClaimNames.Jti  ,Guid.NewGuid().ToString())
 
@@ -61,7 +61,7 @@ namespace SurveyBasket.Authentication
                 var JwtToken = validatedToken as JwtSecurityToken;
                 return JwtToken!.Claims.First(x => x.Type == JwtRegisteredClaimNames.Sub).Value;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null!;
             }

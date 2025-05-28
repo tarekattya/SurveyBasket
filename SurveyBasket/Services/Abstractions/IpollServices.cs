@@ -5,7 +5,8 @@ namespace SurveyBasket.Services.Abstractions
 {
     public interface IPollServices
     {
-        public Task<Result<IEnumerable<PollResponse>>> GetAllAsync(CancellationToken cancellationToken);
+        public Task<IEnumerable<PollResponse>> GetAllAsync(CancellationToken cancellationToken);
+        public Task<IEnumerable<PollResponse>> GetCurrentAsync(CancellationToken cancellationToken);
 
         public Task<Result<PollResponse>> GetAsync(int id,CancellationToken cancellationToken);
 

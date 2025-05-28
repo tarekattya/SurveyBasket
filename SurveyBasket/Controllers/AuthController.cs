@@ -18,14 +18,14 @@ namespace SurveyBasket.Controllers
         {
             var AuthResult = await _authService.GetTokenAsync(requst.Email, requst.Password, cancellationToken);
 
-            return AuthResult.IsSuccess ? Ok(AuthResult.Value) : AuthResult.ToProblem(StatusCodes.Status404NotFound);
+            return AuthResult.IsSuccess ? Ok(AuthResult.Value) : AuthResult.ToProblem();
         }
         [HttpPost("Refresh")]
         public async Task<IActionResult> RefreshAsync([FromBody] RefreshTokenRequest tokenRequest , CancellationToken cancellationToken)
         {
             var AuthResult = await _authService.GetRefreshTokenAsync(tokenRequest.Token, tokenRequest.RefreshToken, cancellationToken);
 
-            return AuthResult.IsSuccess ? Ok(AuthResult) : AuthResult.ToProblem(StatusCodes.Status400BadRequest);
+            return AuthResult.IsSuccess ? Ok(AuthResult) : AuthResult.ToProblem();
         }
 
         [HttpPut("Revoke-refresh-token")]
@@ -33,7 +33,7 @@ namespace SurveyBasket.Controllers
         {
             var IsRevoked = await _authService.RevokeRefreshTokenAsync(tokenRequest.Token, tokenRequest.RefreshToken, cancellationToken);
 
-            return IsRevoked.IsSuccess ? Ok("Done") : IsRevoked.ToProblem(StatusCodes.Status400BadRequest); ;
+            return IsRevoked.IsSuccess ? Ok("Done") : IsRevoked.ToProblem(); ;
         }
 
     }
