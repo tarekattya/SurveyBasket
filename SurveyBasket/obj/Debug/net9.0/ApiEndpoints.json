@@ -200,6 +200,54 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "SurveyBasket.Controllers.ResultsController",
+    "Method": "PollVotes",
+    "RelativePath": "api/Polls/{PollId}/Results/row-data",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PollId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SurveyBasket.Controllers.ResultsController",
+    "Method": "VotesPerDay",
+    "RelativePath": "api/Polls/{PollId}/Results/votes-per-day",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PollId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SurveyBasket.Controllers.ResultsController",
+    "Method": "VotesPerQuestions",
+    "RelativePath": "api/Polls/{PollId}/Results/votes-per-questions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PollId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SurveyBasket.Controllers.VotesController",
     "Method": "Start",
     "RelativePath": "api/polls/{pollId}/vote",
