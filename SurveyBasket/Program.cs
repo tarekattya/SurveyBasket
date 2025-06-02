@@ -4,6 +4,7 @@ using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
+using Serilog;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using SurveyBasket.Presistence.DbContextt;
 
@@ -18,6 +19,11 @@ namespace SurveyBasket
             builder.Services.Addservices(builder.Configuration);
             //builder.Services.AddIdentityApiEndpoints<ApplicationUser>().
               // AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Host.UseSerilog((context,configuration) =>
+            {
+                configuration.ReadFrom.Configuration(context.Configuration)
+                    .WriteTo.Console();
+            });
             var app = builder.Build();
             using (var scope = app.Services.CreateScope())
             {
@@ -38,6 +44,7 @@ namespace SurveyBasket
 
             }
 
+            app.UseSerilogRequestLogging();
             app.UseHttpsRedirection();
             app.UseCors();
             app.UseAuthorization();

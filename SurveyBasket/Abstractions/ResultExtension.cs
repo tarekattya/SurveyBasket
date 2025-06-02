@@ -12,29 +12,15 @@ namespace SurveyBasket.Abstractions
                 throw new InvalidOperationException("cannot convert succes result to problem");
 
 
-            var problem = Results.Problem();
+            var problem = Results.Problem(statusCode:result.Error.StatusCode);
             var problemDetails = problem.GetType().GetProperty(nameof(ProblemDetails))!.GetValue(problem) as ProblemDetails;
 
             problemDetails!.Extensions = new Dictionary<string, object?>()
                {{
                        "errors",
-                         new[] {  result.Error}
+                         new[] {  result.Error.Code , result.Error.Description}
                    }
                };
-
-
-
-            //var problemDetails = new ProblemDetails
-            //{
-            //    Status  = statusCode,
-            //    Title = title,
-            //    Extensions = new Dictionary<string, object?>()
-            //   {{
-            //           "errors",
-            //             new[] {  result.Error}
-            //       }
-            //   }
-            //};
             return new ObjectResult(problemDetails);
 
 

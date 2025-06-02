@@ -180,3 +180,12 @@ F:\SurveyBasket\SurveyBasket\obj\Debug\net9.0\refint\SurveyBasket.dll
 F:\SurveyBasket\SurveyBasket\obj\Debug\net9.0\SurveyBasket.pdb
 F:\SurveyBasket\SurveyBasket\obj\Debug\net9.0\SurveyBasket.genruntimeconfig.cache
 F:\SurveyBasket\SurveyBasket\obj\Debug\net9.0\ref\SurveyBasket.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.AspNetCore.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.Extensions.Hosting.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.Extensions.Logging.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.Formatting.Compact.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.Settings.Configuration.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.Sinks.Console.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.Sinks.Debug.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.Sinks.File.dll
