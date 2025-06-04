@@ -189,3 +189,4 @@ F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.Settings.Configuration.dll
 F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.Sinks.Console.dll
 F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.Sinks.Debug.dll
 F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.Sinks.File.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Microsoft.Extensions.Caching.Hybrid.dll

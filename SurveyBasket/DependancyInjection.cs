@@ -27,6 +27,7 @@ namespace SurveyBasket
 
             services.AddControllers();
             services.AddOpenApi();
+            services.AddHybridCache();
 
 
 

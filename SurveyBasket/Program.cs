@@ -18,12 +18,23 @@ namespace SurveyBasket
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.Addservices(builder.Configuration);
             //builder.Services.AddIdentityApiEndpoints<ApplicationUser>().
-              // AddEntityFrameworkStores<ApplicationDbContext>();
-            builder.Host.UseSerilog((context,configuration) =>
+            // AddEntityFrameworkStores<ApplicationDbContext>();
+            //builder.Services.AddOutputCache(options =>
+            //{
+            //    options.AddPolicy("Polls", x => x.Cache().Expire(TimeSpan.FromSeconds(120)).Tag("AvaliableQuestion")
+            //    );
+
+
+
+
+            builder.Host.UseSerilog((context, configuration) =>
             {
                 configuration.ReadFrom.Configuration(context.Configuration)
                     .WriteTo.Console();
             });
+
+
+
             var app = builder.Build();
             using (var scope = app.Services.CreateScope())
             {

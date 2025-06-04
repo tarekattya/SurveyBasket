@@ -1,10 +1,18 @@
-﻿using SurveyBasket.Presistence.DbContextt;
+﻿using Microsoft.AspNetCore.OutputCaching;
+using Microsoft.Extensions.Caching.Hybrid;
+using Microsoft.Extensions.Caching.Memory;
+using SurveyBasket.Presistence.DbContextt;
+using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 
 namespace SurveyBasket.Services
 {
-    public class QuestionService(ApplicationDbContext context) : IQuestionService
+    public class QuestionService(ApplicationDbContext context , HybridCache hybridCache  , ILogger<QuestionService> logger) : IQuestionService
     {
         private readonly ApplicationDbContext _context = context;
+        private readonly HybridCache _hybridCache = hybridCache;
+        private readonly ILogger<QuestionService> _logger = logger;
+        private const string prefixmemorycash = "AvaliableQuestion";
 
 
 
@@ -39,16 +47,30 @@ namespace SurveyBasket.Services
             if (!PollIsExist)
                 return Result.Failure<IEnumerable<QuestionResponse>>(PollErrors.PollNotFound);
 
-            var questions = await _context.Questions
-                .Where(P => P.PollId == Pollid && P.IsActive)
-                .Include(Q => Q.Answers)
-                .Select(Q => new QuestionResponse(
-                
-                     Q.Id,
-                     Q.Content,
-                    Q.Answers.Where(A => A.IsActive).Select(A => new AnswerResponse( A.Id , A.Content ))
-                )).AsNoTracking()
-                .ToListAsync(cancellationToken);
+
+            var cachKey = $"{prefixmemorycash}-{Pollid}";
+
+           
+
+
+
+            var questions = await _hybridCache.GetOrCreateAsync(
+
+
+                cachKey,
+                 async CashEntry => await _context.Questions
+                 .Where(P => P.PollId == Pollid && P.IsActive)
+                 .Include(Q => Q.Answers)
+                 .Select(Q => new QuestionResponse(
+
+                      Q.Id,
+                      Q.Content,
+                     Q.Answers.Where(A => A.IsActive).Select(A => new AnswerResponse(A.Id, A.Content))
+                 )).AsNoTracking()
+                 .ToListAsync(cancellationToken)
+
+                );
+
 
             if (questions is null || !questions.Any())
                 return Result.Failure<IEnumerable<QuestionResponse>>(QuestionErrors.QuestionNotFound);
@@ -89,6 +111,9 @@ namespace SurveyBasket.Services
            await _context.Questions.AddAsync(question , cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
+
+            await _hybridCache.RemoveAsync($"{prefixmemorycash}-{Pollid}", cancellationToken);
+
             return Result.Success(question.Adapt<QuestionResponse>());
 
 
@@ -125,6 +150,7 @@ namespace SurveyBasket.Services
                      
 
             await _context.SaveChangesAsync(cancellationToken);
+            await _hybridCache.RemoveAsync($"{prefixmemorycash}-{Pollid}", cancellationToken);
             return Result.Success();
         }
 
@@ -136,6 +162,7 @@ namespace SurveyBasket.Services
             Question.IsActive = !Question.IsActive;
             _context.Questions.Update(Question);
             await _context.SaveChangesAsync(cancellationToken);
+            await _hybridCache.RemoveAsync($"{prefixmemorycash}-{Pollid}", cancellationToken);
             return Result.Success();
         }
 
