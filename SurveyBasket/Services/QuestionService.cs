@@ -56,9 +56,9 @@ namespace SurveyBasket.Services
 
             var questions = await _hybridCache.GetOrCreateAsync(
 
-
                 cachKey,
                  async CashEntry => await _context.Questions
+                 
                  .Where(P => P.PollId == Pollid && P.IsActive)
                  .Include(Q => Q.Answers)
                  .Select(Q => new QuestionResponse(

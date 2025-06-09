@@ -190,3 +190,6 @@ F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.Sinks.Console.dll
 F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.Sinks.Debug.dll
 F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Serilog.Sinks.File.dll
 F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\Microsoft.Extensions.Caching.Hybrid.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\MailKit.dll
+F:\SurveyBasket\SurveyBasket\bin\Debug\net9.0\MimeKit.dll

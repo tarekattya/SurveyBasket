@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using SurveyBasket.Options;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 
 namespace SurveyBasket
@@ -21,19 +22,27 @@ namespace SurveyBasket
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IVoteServices, VoteServices>();
             services.AddScoped<IResultService, ResultService>();
-
+            services.AddScoped<IEmailSender, EmailServices>();
+                    
             
 
 
             services.AddControllers();
             services.AddOpenApi();
             services.AddHybridCache();
+            services.AddHttpContextAccessor();
+
 
 
 
 
 
             services.AddExceptionHandler<GlobalExecptionsHandler>();
+            services.Configure<IdentityOptions>(options => {
+                options.Password.RequiredLength = 8;
+                options.SignIn.RequireConfirmedEmail = true;
+                options.User.RequireUniqueEmail = true;
+            });
             services.AddProblemDetails();
 
             services.AddSMapsterservices();
@@ -81,12 +90,13 @@ namespace SurveyBasket
             return services;
         }
 
-        static IServiceCollection AddIdentitityServices(this IServiceCollection services , IConfiguration configuration)
+        static IServiceCollection AddIdentitityServices(this IServiceCollection services, IConfiguration configuration)
         {
 
             services
-             .AddIdentity<ApplicationUser, IdentityRole >()
-             .AddEntityFrameworkStores<ApplicationDbContext>();
+             .AddIdentity<ApplicationUser, IdentityRole>()
+             .AddEntityFrameworkStores<ApplicationDbContext>()
+             .AddDefaultTokenProviders();
 
 
             services.AddSingleton<IJWTprovider, JWTProvider>();
@@ -98,6 +108,8 @@ namespace SurveyBasket
                 .ValidateOnStart();
 
             var JwtSettings = configuration.GetSection(JwtOptions.SectionName).Get<JwtOptions>();
+            services.Configure<EmailSettings>(configuration.GetSection(nameof(EmailSettings)));
+
 
 
 
@@ -118,7 +130,7 @@ namespace SurveyBasket
                         ValidateIssuer = true,
                         ValidateAudience = true,
                         ValidateLifetime = true,
-                        ValidAudience =JwtSettings.Audience,
+                        ValidAudience = JwtSettings.Audience,
                         ValidIssuer = JwtSettings.Issuer
 
                     };
@@ -127,6 +139,8 @@ namespace SurveyBasket
 
                 });
 
+
+           
 
 
             return services;
