@@ -1,5 +1,8 @@
 
 using FluentValidation;
+using Hangfire;
+using Hangfire.Dashboard;
+using HangfireBasicAuthenticationFilter;
 using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
@@ -36,9 +39,9 @@ namespace SurveyBasket
 
 
             var app = builder.Build();
-            using (var scope = app.Services.CreateScope())
+            using (var scopee = app.Services.CreateScope())
             {
-                await SeedDefaultUserAsync(scope.ServiceProvider);
+                await SeedDefaultUserAsync(scopee.ServiceProvider);
             }
 
 
@@ -56,7 +59,31 @@ namespace SurveyBasket
             }
 
             app.UseSerilogRequestLogging();
+            app.UseHangfireDashboard("/jobs", new DashboardOptions
+            {
+
+                Authorization = [
+
+                    new HangfireCustomBasicAuthenticationFilter{
+
+                        User = app.Configuration.GetValue<string>("HangfireSettings:UserName"),
+                        Pass = app.Configuration.GetValue<string>("HangfireSettings:Password")
+                    }],
+                DashboardTitle = "TatuuJobs",
+                IsReadOnlyFunc = (DashboardContext context) => true,
+
+
+            });
+
+            
             app.UseHttpsRedirection();
+
+             var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+            using var scope = scopeFactory.CreateScope();
+            var NotifacationServices = scope.ServiceProvider.GetRequiredService<INotifacitionServices>();
+
+            RecurringJob.AddOrUpdate("SendNotificationAsync",() => NotifacationServices.SendNotificationAsync(null), Cron.Daily);
+
             app.UseCors();
             app.UseAuthorization();
 

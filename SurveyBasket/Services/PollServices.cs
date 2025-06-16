@@ -1,12 +1,12 @@
-﻿using SurveyBasket.Presistence.DbContextt;
+﻿using Hangfire;
+using SurveyBasket.Presistence.DbContextt;
 
 namespace SurveyBasket.Services
 {
-    public class PollServices(ApplicationDbContext context) : IPollServices
+    public class PollServices(ApplicationDbContext context , INotifacitionServices notifacitionServices) : IPollServices
     {
         private readonly ApplicationDbContext _context = context;
-
-
+        private readonly INotifacitionServices _notifacitionServices = notifacitionServices;
 
         public async Task<IEnumerable<PollResponse>> GetAllAsync(CancellationToken cancellationToken) 
         =>   await _context.Polls
@@ -18,7 +18,7 @@ namespace SurveyBasket.Services
 
         public async Task<IEnumerable<PollResponse>> GetCurrentAsync(CancellationToken cancellationToken)
        => await _context.Polls
-                .Where(p => p.IsPublished && p.StartsAt <= DateTime.UtcNow && p.EndsAt >= DateTime.UtcNow)
+                .Where(p => p.IsPublished && p.StartsAt <= DateOnly.FromDateTime(DateTime.UtcNow) && p.EndsAt >= DateOnly.FromDateTime(DateTime.UtcNow))
                .AsNoTracking()
                .ProjectToType<PollResponse>()
                .ToListAsync(cancellationToken);
@@ -81,6 +81,10 @@ namespace SurveyBasket.Services
 
             currentPOll.IsPublished = !currentPOll.IsPublished;
             await _context.SaveChangesAsync(cancellationToken);
+
+            if(currentPOll.IsPublished && currentPOll.StartsAt == DateOnly.FromDateTime(DateTime.UtcNow))
+                    BackgroundJob.Enqueue(() => _notifacitionServices.SendNotificationAsync(currentPOll.Id));
+
             return Result.Success();
         }
     }

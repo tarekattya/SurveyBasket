@@ -15,6 +15,13 @@ namespace SurveyBasket.Presistence.EntitesConfiguration
             builder.Property(p => p.FirstName).HasMaxLength(50);
             builder.Property(p => p.LastName).HasMaxLength(50);
 
+            builder.Property(u => u.ProfileImage)
+                         .HasColumnType("varbinary(max)")
+                         .IsRequired(false); // الصورة اختيارية
+
+            builder.Property(u => u.ProfileImageContentType)
+                   .HasMaxLength(100)
+                   .IsRequired(false);
         }
     }
 }

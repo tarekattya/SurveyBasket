@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using SurveyBasket.Contracts.Account;
 using SurveyBasket.Contracts.Authentication;
 using SurveyBasket.Options;
 using System.Reflection;
@@ -47,6 +48,21 @@ namespace SurveyBasket.Controllers
         public async Task<IActionResult> ResendConfirmEmailAsync([FromBody] ResendConfirmationCodeRequest request, CancellationToken cancellationToken)
         {
             var AuthResult = await _authService.ResendConfirmEmailAsync(request, cancellationToken);
+
+            return AuthResult.IsSuccess ? Ok() : AuthResult.ToProblem();
+        }
+
+        [HttpPost("resend-reset-code")]
+        public async Task<IActionResult> ResetCodeAsync([FromBody] ForgetPasswordRequest request)
+        {
+            var AuthResult = await _authService.ResendResetCodeAsync(request.Email);
+
+            return AuthResult.IsSuccess ? Ok() : AuthResult.ToProblem();
+        }
+        [HttpPost("reset-Password")]
+        public async Task<IActionResult> ResetPasswordAsync([FromBody] ResetPasswordRequest request)
+        {
+            var AuthResult = await _authService.ResetPasswordAsync(request);
 
             return AuthResult.IsSuccess ? Ok() : AuthResult.ToProblem();
         }

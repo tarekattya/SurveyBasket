@@ -8,6 +8,8 @@ global using Microsoft.AspNetCore.Authorization;
 
 
 global using Mapster;
+global using Hangfire;
+
 global using FluentValidation;
 global using SurveyBasket.Presistence.Entites;
 global using Microsoft.AspNetCore.Identity;

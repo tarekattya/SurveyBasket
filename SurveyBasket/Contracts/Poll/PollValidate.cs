@@ -23,7 +23,7 @@ namespace SurveyBasket.Contracts.Poll
 
             RuleFor(x => x.StartsAt)
                 .NotEmpty()
-                .GreaterThanOrEqualTo(DateTime.Today);
+                .GreaterThanOrEqualTo(DateOnly.FromDateTime(DateTime.Today));
 
             RuleFor(x => x.EndsAt)
                 .NotEmpty();

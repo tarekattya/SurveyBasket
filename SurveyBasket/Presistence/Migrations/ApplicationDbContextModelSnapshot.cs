@@ -17,7 +17,7 @@ namespace SurveyBasket.Presistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.4")
+                .HasAnnotation("ProductVersion", "9.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -251,6 +251,13 @@ namespace SurveyBasket.Presistence.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<byte[]>("ProfileImage")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ProfileImageContentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -289,14 +296,14 @@ namespace SurveyBasket.Presistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EndsAt")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("EndsAt")
+                        .HasColumnType("date");
 
                     b.Property<bool>("IsPublished")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("StartsAt")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("StartsAt")
+                        .HasColumnType("date");
 
                     b.Property<string>("Summary")
                         .IsRequired()
@@ -610,7 +617,7 @@ namespace SurveyBasket.Presistence.Migrations
                         .IsRequired();
 
                     b.HasOne("SurveyBasket.Presistence.Entites.Question", "Question")
-                        .WithMany()
+                        .WithMany("Votes")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -638,6 +645,8 @@ namespace SurveyBasket.Presistence.Migrations
             modelBuilder.Entity("SurveyBasket.Presistence.Entites.Question", b =>
                 {
                     b.Navigation("Answers");
+
+                    b.Navigation("Votes");
                 });
 
             modelBuilder.Entity("SurveyBasket.Presistence.Entites.Vote", b =>

@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using SurveyBasket.Options;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Hangfire;
 
 
 namespace SurveyBasket
@@ -17,12 +18,14 @@ namespace SurveyBasket
 
         public static IServiceCollection Addservices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IPollServices, PollServices>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IVoteServices, VoteServices>();
             services.AddScoped<IResultService, ResultService>();
             services.AddScoped<IEmailSender, EmailServices>();
+            services.AddScoped<INotifacitionServices, NotifacitionServices>();
                     
             
 
@@ -31,6 +34,7 @@ namespace SurveyBasket
             services.AddOpenApi();
             services.AddHybridCache();
             services.AddHttpContextAccessor();
+            services.AddDataBackGroundServices(configuration);
 
 
 
@@ -60,11 +64,28 @@ namespace SurveyBasket
 
             var ConnectionString = configuration.GetConnectionString("DefaultConnection") ??
                throw new InvalidOperationException("Not founded as connectionstring");
+            
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(ConnectionString));
 
             return services;
         }
+
+        static IServiceCollection AddDataBackGroundServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            // Add Hangfire services.
+            services.AddHangfire(config => config
+                .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+                .UseSimpleAssemblyNameTypeSerializer()
+                .UseRecommendedSerializerSettings()
+                .UseSqlServerStorage(configuration.GetConnectionString("HangfireCS")));
+
+            // Add the processing server as IHostedService
+            services.AddHangfireServer();
+
+            return services;
+        }
+
 
          static IServiceCollection AddSMapsterservices(this IServiceCollection services)
         {

@@ -14,7 +14,7 @@ namespace SurveyBasket.Services
                 return Result.Failure(VoteErrors.DublicateVotes);
 
             var pollIsExist = await _context.Polls
-                .AnyAsync(P => P.Id == PollId && P.IsPublished && P.StartsAt < DateTime.UtcNow && P.EndsAt > DateTime.UtcNow, cancellationToken);
+                .AnyAsync(P => P.Id == PollId && P.IsPublished && P.StartsAt < DateOnly.FromDateTime(DateTime.UtcNow) && P.EndsAt > DateOnly.FromDateTime(DateTime.UtcNow), cancellationToken);
 
             if(!pollIsExist)
                 return Result.Failure(PollErrors.PollNotFound);

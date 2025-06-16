@@ -1,5 +1,7 @@
 ﻿
 
+using SurveyBasket.Contracts.Account;
+
 namespace SurveyBasket.Mapping
 {
     public class MappingConfig : IRegister
@@ -12,6 +14,8 @@ namespace SurveyBasket.Mapping
 
             config.NewConfig<RegisterRequest, ApplicationUser>()
                 .Map(dest => dest.UserName, src => src.Email);
+
+            
 
 
         }

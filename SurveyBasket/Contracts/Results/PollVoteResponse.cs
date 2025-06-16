@@ -3,8 +3,8 @@
     public record PollVoteResponse(
         string title,
         string summary,
-        DateTime StartsAt,
-        DateTime EndsAt,
+        DateOnly StartsAt,
+        DateOnly EndsAt,
         IEnumerable<VoteResponse> Votes
         );
 

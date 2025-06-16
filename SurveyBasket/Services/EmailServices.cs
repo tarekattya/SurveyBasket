@@ -13,7 +13,7 @@ namespace SurveyBasket.Services
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
 
-            var message = new MimeKit.MimeMessage
+            var message = new MimeMessage
             {
                 Sender = MailboxAddress.Parse(_emailsettings.User),
                 Subject = subject,

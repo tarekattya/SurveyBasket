@@ -9,9 +9,9 @@
 
         public bool IsPublished { get; set; }
 
-        public DateTime StartsAt { get; set; } = DateTime.UtcNow;
+        public DateOnly StartsAt { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
+        public DateOnly EndsAt { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
 
-        public DateTime EndsAt { get; set; } = DateTime.UtcNow;
 
         public ICollection<Question> Questions { get; set; } = [];
         public ICollection<Vote> Votes { get; set; } = [];
