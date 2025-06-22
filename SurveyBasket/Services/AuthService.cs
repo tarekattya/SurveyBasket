@@ -6,6 +6,7 @@ using SurveyBasket.Authentication;
 using SurveyBasket.Contracts.Account;
 using SurveyBasket.Errors;
 using SurveyBasket.Helpers;
+using SurveyBasket.Presistence.DbContextt;
 using System.Security.Cryptography;
 using System.Text;
 using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
@@ -14,7 +15,9 @@ using ResetPasswordRequest = SurveyBasket.Contracts.Account.ResetPasswordRequest
 namespace SurveyBasket.Services
 {
     public class AuthService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
-        IJWTprovider jWTprovider, ILogger<IAuthService> logger, IHttpContextAccessor contextAccessor , IEmailSender emailSender) : IAuthService
+        IJWTprovider jWTprovider, ILogger<IAuthService> logger, IHttpContextAccessor contextAccessor 
+        , IEmailSender emailSender
+        ,ApplicationDbContext context) : IAuthService
     {
         private readonly UserManager<ApplicationUser> _userManager = userManager;
         private readonly SignInManager<ApplicationUser> _signInManager = signInManager;
@@ -22,6 +25,7 @@ namespace SurveyBasket.Services
         private readonly ILogger<IAuthService> _logger = logger;
         private readonly IHttpContextAccessor _contextAccessor = contextAccessor;
         private readonly IEmailSender _emailSender = emailSender;
+        private readonly ApplicationDbContext _context = context;
         private readonly int _refreshTokenExpireDays = 14;
 
         public async Task<Result<AuthResponse>> GetTokenAsync(string Email, string password, CancellationToken cancellationToken)
@@ -32,7 +36,8 @@ namespace SurveyBasket.Services
             var result = await _signInManager.PasswordSignInAsync(user, password, false, false);
             if (result.Succeeded)
             {
-                (string Token, int ExpireInMinutes) = _jWTprovider.GenerateToken(user);
+               var (userRoles , Permission) =  await GetUserClaimsAsync(user, cancellationToken);
+               var ( Token,  ExpireInMinutes) = _jWTprovider.GenerateToken(user , userRoles , Permission);
 
                 var refreshToken = GenerateRefreshToken();
                 var refreshTokenExpireDate = DateTime.UtcNow.AddDays(_refreshTokenExpireDays);
@@ -71,7 +76,8 @@ namespace SurveyBasket.Services
             if (userRefreshToken is null)
                 return Result.Failure<AuthResponse>(AuthErrors.InvalidTokens)!;
             userRefreshToken.RevokedOn = DateTime.UtcNow;
-            (string newToken, int ExpireInMinutes) = _jWTprovider.GenerateToken(user);
+            var (userRoles, Permission) = await GetUserClaimsAsync(user, cancellationToken);
+            (string newToken, int ExpireInMinutes) = _jWTprovider.GenerateToken(user, userRoles, Permission);
 
             var NewrefreshToken = GenerateRefreshToken();
             var refreshTokenExpireDate = DateTime.UtcNow.AddDays(_refreshTokenExpireDays);
@@ -123,6 +129,8 @@ namespace SurveyBasket.Services
                 _logger.LogInformation("Confirmation Code {code}", code);
                 await SendConfirmationEmail(user, code);
 
+
+
                 return Result.Success(code);
             } 
             var error = Create.Errors.First();
@@ -153,6 +161,7 @@ namespace SurveyBasket.Services
 
             if (result.Succeeded)
             {
+                await _userManager.AddToRoleAsync(user, RoleDefault.Member); 
                 return Result.Success();
             }
             var error = result.Errors.First();
@@ -239,6 +248,27 @@ namespace SurveyBasket.Services
             await Task.CompletedTask;
         }
 
+
+        private async Task<(IEnumerable<string> UserRoles , IEnumerable<string> UserPermission)> GetUserClaimsAsync(ApplicationUser user , CancellationToken cancellationToken){
+
+            var UserRoles = await _userManager.GetRolesAsync(user);
+
+            var UserPermission = await (from r in _context.Roles
+                                        join p in _context.RoleClaims
+                                        on r.Id equals p.RoleId
+                                        where UserRoles.Contains(r.Name!)
+                                        select p.ClaimValue
+
+
+                                        ).Distinct().ToListAsync(cancellationToken);
+
+
+            return (UserRoles, UserPermission);
+
+                                       
+
+
+            }
         private async Task SendResetCode(ApplicationUser user, string code)
         {
             var origin = _contextAccessor.HttpContext?.Request.Headers.Origin;

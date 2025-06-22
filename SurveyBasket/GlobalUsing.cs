@@ -13,6 +13,8 @@ global using Hangfire;
 global using FluentValidation;
 global using SurveyBasket.Presistence.Entites;
 global using Microsoft.AspNetCore.Identity;
+global using SurveyBasket.Abstractions.Const;
+
 
 
 

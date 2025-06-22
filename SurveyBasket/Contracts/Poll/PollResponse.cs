@@ -5,8 +5,8 @@
         string Title,
         string Summary,
         bool IsPublished,
-        DateTime StartsAt, 
-        DateTime EndsAt
+        DateOnly StartsAt, 
+        DateOnly EndsAt
         );
  }
 

@@ -1,6 +1,8 @@
 ﻿
 
 
+using SurveyBasket.Authentication.Filters;
+
 namespace SurveyBasket.Controllers
 
 
@@ -8,12 +10,12 @@ namespace SurveyBasket.Controllers
     [ApiController]
     [Route("api/[controller]")]
 
-     [Authorize]
     public class PollsController(IPollServices pollServices) : ControllerBase
     {
         private readonly IPollServices _pollServices = pollServices;
 
         [HttpGet("")]
+        [HasPermission(Permissions.Polls_Read)]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         => Ok(await _pollServices.GetAllAsync(cancellationToken));
 

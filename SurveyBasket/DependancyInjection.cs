@@ -9,6 +9,7 @@ using System.Text;
 using SurveyBasket.Options;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Hangfire;
+using SurveyBasket.Authentication.Filters;
 
 
 namespace SurveyBasket
@@ -115,7 +116,7 @@ namespace SurveyBasket
         {
 
             services
-             .AddIdentity<ApplicationUser, IdentityRole>()
+             .AddIdentity<ApplicationUser, ApplicationRole>()
              .AddEntityFrameworkStores<ApplicationDbContext>()
              .AddDefaultTokenProviders();
 
@@ -130,6 +131,11 @@ namespace SurveyBasket
 
             var JwtSettings = configuration.GetSection(JwtOptions.SectionName).Get<JwtOptions>();
             services.Configure<EmailSettings>(configuration.GetSection(nameof(EmailSettings)));
+
+
+            services.AddTransient<IAuthorizationHandler, PermissionAuthorizationHandler>();
+            services.AddTransient<IAuthorizationPolicyProvider, PermissionAuthPolicyProvider>();
+
 
 
 

@@ -39,10 +39,7 @@ namespace SurveyBasket
 
 
             var app = builder.Build();
-            using (var scopee = app.Services.CreateScope())
-            {
-                await SeedDefaultUserAsync(scopee.ServiceProvider);
-            }
+            
 
 
             if (app.Environment.IsDevelopment())
@@ -97,42 +94,6 @@ namespace SurveyBasket
         }
 
 
-        static async Task SeedDefaultUserAsync(IServiceProvider services)
-        {
-            var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-
-            var email = "admin@survey.com";
-            var password = "Admin@123";
-            var roleName = "Admin";
-            var FirstName = "Admin";
-            var LastName = "Admin";
-
-
-            if (await roleManager.FindByNameAsync(roleName) == null)
-            {
-                await roleManager.CreateAsync(new IdentityRole(roleName));
-            }
-
-            if (await userManager.FindByEmailAsync(email) == null)
-            {
-                var user = new ApplicationUser
-                {
-                    UserName = email,
-                    Email = email,
-                    EmailConfirmed = true,
-                    LastName = LastName,
-                    FirstName = FirstName
-
-                };
-
-                var result = await userManager.CreateAsync(user, password);
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, roleName);
-                }
-            }
-        }
 
 
 
