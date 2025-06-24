@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SurveyBasket.Authentication.Filters;
 
 namespace SurveyBasket.Controllers
 {
     [Route("api/Polls/{pollId}/[controller]")]
     [ApiController]
-    [Authorize]
+    
     public class QuestionsController(IQuestionService questionService) : ControllerBase
     {
         private readonly IQuestionService _questionService = questionService;
@@ -13,6 +14,8 @@ namespace SurveyBasket.Controllers
 
 
         [HttpGet("")]
+        [HasPermission(Permissions.Questions_Read)]
+
         public async Task<IActionResult> GetAll([FromRoute] int pollId, CancellationToken cancellationToken)
         {
             var result = await _questionService.GetAllAsync(pollId, cancellationToken);
@@ -24,6 +27,8 @@ namespace SurveyBasket.Controllers
         }
 
         [HttpGet("{id}")]
+        [HasPermission(Permissions.Questions_Read)]
+
         public async Task<IActionResult> Get([FromRoute] int id, [FromRoute] int pollId, CancellationToken cancellationToken)
         {
             var result = await _questionService.GetAsync(pollId, id, cancellationToken);
@@ -33,6 +38,8 @@ namespace SurveyBasket.Controllers
         }
 
         [HttpPost("")]
+        [HasPermission(Permissions.Questions_Add)]
+
         public async Task<IActionResult> Add([FromRoute] int pollId, [FromBody] QuestionRequest request, CancellationToken cancellationToken)
         {
             var result = await _questionService.AddAsync(pollId, request, cancellationToken);
@@ -46,6 +53,8 @@ namespace SurveyBasket.Controllers
 
 
         [HttpPut("{id}")]
+        [HasPermission(Permissions.Questions_Update)]
+
         public async Task<IActionResult> Update([FromRoute] int pollId, [FromRoute] int id, [FromBody] QuestionRequest request, CancellationToken cancellationToken)
         {
             var result = await _questionService.UpdateAsync(pollId,id, request, cancellationToken);
@@ -59,6 +68,9 @@ namespace SurveyBasket.Controllers
         }
 
         [HttpPut("{id}/ToggleStatus")]
+        [HasPermission(Permissions.Questions_Update)]
+
+
         public async Task<IActionResult> ToggleStatus([FromRoute] int id, [FromRoute] int pollId, CancellationToken cancellationToken)
         {
             var result = await _questionService.ToggleStatus(pollId, id, cancellationToken);

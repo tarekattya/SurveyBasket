@@ -15,7 +15,7 @@ public class VotesController(IQuestionService questionService, IVoteServices vot
     [HttpGet("")]
     public async Task<IActionResult> Start([FromRoute] int pollId, CancellationToken cancellationToken)
     {
-        var userId = "ffd76f88-1c05-4e3e-bec5-17e58bcdb13b";//User.GetUserId();
+        var userId = User.GetUserId();
 
         var result = await _questionService.GetAvaliableAll(pollId, userId!, cancellationToken);
 
