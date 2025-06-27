@@ -23,6 +23,7 @@ namespace SurveyBasket
             services.AddScoped<IPollServices, PollServices>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IQuestionService, QuestionService>();
+            services.AddScoped<IUserServices, UserServices>();
             services.AddScoped<IVoteServices, VoteServices>();
             services.AddScoped<IResultService, ResultService>();
             services.AddScoped<IRoleServices, RoleServices>();

@@ -1,5 +1,4 @@
-﻿using SurveyBasket.Contracts;
-using SurveyBasket.Contracts.Roles;
+﻿using SurveyBasket.Contracts.Roles;
 using SurveyBasket.Presistence.DbContextt;
 
 namespace SurveyBasket.Services
@@ -148,7 +147,7 @@ namespace SurveyBasket.Services
             var role = await _roleManager.FindByIdAsync(id);
 
             if (role is null)
-                return Result.Failure<RoleDeatilsResponse>(RoleError.RoleNotFound);
+                return Result.Failure(RoleError.RoleNotFound);
 
             role.IsDeleted = !role.IsDeleted;
 

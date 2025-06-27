@@ -33,7 +33,15 @@ namespace SurveyBasket.Services
             var user = await _userManager.FindByEmailAsync(Email);
             if (user is null)
                 return Result.Failure<AuthResponse>(AuthErrors.InvalidUserCredentials);
-            var result = await _signInManager.PasswordSignInAsync(user, password, false, false);
+
+            if(user.IsDisable)
+                return Result.Failure<AuthResponse>(AuthErrors.DisabledUser);
+
+            if(user.LockoutEnd > DateTime.UtcNow)
+                return Result.Failure<AuthResponse>(AuthErrors.LockedUser);
+
+
+            var result = await _signInManager.PasswordSignInAsync(user, password, false, true);
             if (result.Succeeded)
             {
                var (userRoles , Permission) =  await GetUserClaimsAsync(user, cancellationToken);
@@ -56,7 +64,11 @@ namespace SurveyBasket.Services
             }
 
 
-            return Result.Failure<AuthResponse>(result.IsNotAllowed ? AuthErrors.NotConfirmedEmail : AuthErrors.InvalidUserCredentials);
+            var error  = result.IsNotAllowed ? AuthErrors.NotConfirmedEmail 
+                : result.IsLockedOut ? AuthErrors.LockedUser :
+                AuthErrors.InvalidUserCredentials;
+
+            return Result.Failure<AuthResponse>(error);
 
 
         }
@@ -71,6 +83,9 @@ namespace SurveyBasket.Services
             var user = await _userManager.FindByIdAsync(userid);
             if (user is null)
                 return Result.Failure<AuthResponse>(AuthErrors.InvalidTokens)!;
+
+            if (user.IsDisable)
+                return Result.Failure<AuthResponse?>(AuthErrors.DisabledUser);
 
             var userRefreshToken = user.RefreshTokens.FirstOrDefault(x => x.Token == refreshToken && x.IsActive);
             if (userRefreshToken is null)
