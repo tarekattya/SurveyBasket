@@ -1,5 +1,7 @@
 ﻿using Hangfire;
+using SurveyBasket.Contracts.Common;
 using SurveyBasket.Presistence.DbContextt;
+using SurveyBasket.Presistence.Entites;
 
 namespace SurveyBasket.Services
 {
@@ -8,20 +10,33 @@ namespace SurveyBasket.Services
         private readonly ApplicationDbContext _context = context;
         private readonly INotifacitionServices _notifacitionServices = notifacitionServices;
 
-        public async Task<IEnumerable<PollResponse>> GetAllAsync(CancellationToken cancellationToken) 
-        =>   await _context.Polls
+        public async Task<PageinatedList<PollResponse>> GetAllAsync(FilterRequest request, CancellationToken cancellationToken) 
+          {
+
+
+            var polls = _context.Polls
+            .Where( p => String.IsNullOrEmpty(request.SearchValue) || p.Title.Contains(request.SearchValue))
+            .AsNoTracking()
+            .ProjectToType<PollResponse>();
+
+            var response = await PageinatedList<PollResponse>.CreateAsync(polls, request.pageSize, request.pageNumber, cancellationToken);
+
+            return response;
+        }
+
+
+        public async Task<PageinatedList<PollResponse>> GetCurrentAsync(FilterRequest request, CancellationToken cancellationToken)
+        {
+            var CurrentPolls = _context.Polls
+                 .Where(p => p.IsPublished && p.StartsAt <= DateOnly.FromDateTime(DateTime.UtcNow) && p.EndsAt >= DateOnly.FromDateTime(DateTime.UtcNow)
+                 && (String.IsNullOrEmpty(request.SearchValue) || p.Title.Contains(request.SearchValue)))
                 .AsNoTracking()
-                .ProjectToType<PollResponse>()
-                .ToListAsync(cancellationToken);
+                .ProjectToType<PollResponse>();
 
+            var response = await PageinatedList<PollResponse>.CreateAsync(CurrentPolls, request.pageSize, request.pageNumber, cancellationToken);
+            return response;
 
-
-        public async Task<IEnumerable<PollResponse>> GetCurrentAsync(CancellationToken cancellationToken)
-       => await _context.Polls
-                .Where(p => p.IsPublished && p.StartsAt <= DateOnly.FromDateTime(DateTime.UtcNow) && p.EndsAt >= DateOnly.FromDateTime(DateTime.UtcNow))
-               .AsNoTracking()
-               .ProjectToType<PollResponse>()
-               .ToListAsync(cancellationToken);
+        }
 
         public async Task<Result<PollResponse>> GetAsync(int id, CancellationToken cancellationToken)
         {

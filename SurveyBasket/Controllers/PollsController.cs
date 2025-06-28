@@ -2,6 +2,7 @@
 
 
 using SurveyBasket.Authentication.Filters;
+using SurveyBasket.Contracts.Common;
 
 namespace SurveyBasket.Controllers
 
@@ -16,12 +17,12 @@ namespace SurveyBasket.Controllers
 
         [HttpGet("")]
         [HasPermission(Permissions.Polls_Read)]
-        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
-        => Ok(await _pollServices.GetAllAsync(cancellationToken));
+        public async Task<IActionResult> GetAll(FilterRequest request, CancellationToken cancellationToken)
+        => Ok(await _pollServices.GetAllAsync(request ,cancellationToken));
 
         [HttpGet("current")]
-        public async Task<IActionResult> GetCurrent(CancellationToken cancellationToken)
-       => Ok(await _pollServices.GetCurrentAsync(cancellationToken));
+        public async Task<IActionResult> GetCurrent(FilterRequest request, CancellationToken cancellationToken)
+       => Ok(await _pollServices.GetCurrentAsync(request,cancellationToken));
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id,CancellationToken cancellationToken)

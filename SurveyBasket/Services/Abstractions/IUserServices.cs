@@ -1,11 +1,12 @@
-﻿using SurveyBasket.Contracts.User;
+﻿using SurveyBasket.Contracts.Common;
+using SurveyBasket.Contracts.User;
 using System.Threading.Tasks;
 
 namespace SurveyBasket.Services.Abstractions
 {
     public interface IUserServices 
     {
-        Task<IEnumerable<UserResponse>> Getallasync(CancellationToken cancellationToken = default);
+        Task<PageinatedList<UserResponse>> Getallasync(FilterRequest filter ,CancellationToken cancellationToken = default);
         Task<Result<UserResponse>> getAsync(string id);
 
         Task<Result<UserResponse>> CreateAsync(CreateUserRequest request, CancellationToken cancellationToken = default);

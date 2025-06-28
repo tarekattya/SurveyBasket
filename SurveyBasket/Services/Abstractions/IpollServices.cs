@@ -1,12 +1,13 @@
 ﻿
+using SurveyBasket.Contracts.Common;
 using System.Threading;
 
 namespace SurveyBasket.Services.Abstractions
 {
     public interface IPollServices
     {
-        public Task<IEnumerable<PollResponse>> GetAllAsync(CancellationToken cancellationToken);
-        public Task<IEnumerable<PollResponse>> GetCurrentAsync(CancellationToken cancellationToken);
+        public Task<PageinatedList<PollResponse>> GetAllAsync(FilterRequest request, CancellationToken cancellationToken);
+        public Task<PageinatedList<PollResponse>> GetCurrentAsync(FilterRequest request, CancellationToken cancellationToken);
 
         public Task<Result<PollResponse>> GetAsync(int id,CancellationToken cancellationToken);
 

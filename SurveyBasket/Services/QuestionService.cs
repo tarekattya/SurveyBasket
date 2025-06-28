@@ -1,13 +1,16 @@
 ﻿using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.VisualBasic;
+using SurveyBasket.Contracts.Common;
 using SurveyBasket.Presistence.DbContextt;
+using System.Linq.Dynamic.Core;
 using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 
 namespace SurveyBasket.Services
 {
-    public class QuestionService(ApplicationDbContext context , HybridCache hybridCache  , ILogger<QuestionService> logger) : IQuestionService
+    public class QuestionService(ApplicationDbContext context, HybridCache hybridCache, ILogger<QuestionService> logger) : IQuestionService
     {
         private readonly ApplicationDbContext _context = context;
         private readonly HybridCache _hybridCache = hybridCache;
@@ -16,21 +19,33 @@ namespace SurveyBasket.Services
 
 
 
-        public async Task<Result<IEnumerable<QuestionResponse>>> GetAllAsync(int Pollid, CancellationToken cancellationToken = default)
+        public async Task<Result<PageinatedList<QuestionResponse>>> GetAllAsync(int Pollid, FilterRequest request, CancellationToken cancellationToken = default)
         {
 
             var PollIsExist = _context.Polls.Any(P => P.Id == Pollid);
             if (!PollIsExist)
-                return Result.Failure<IEnumerable<QuestionResponse>>(PollErrors.PollNotFound);
-            var questions = await _context.Questions
-                .Where(P => P.PollId == Pollid)
-                .Include(Q => Q.Answers)
-                .ProjectToType<QuestionResponse>()
-                .ToListAsync
-                (cancellationToken);
+                return Result.Failure<PageinatedList<QuestionResponse>>(PollErrors.PollNotFound);
+            var query = _context.Questions
+                .Where(P => (P.PollId == Pollid));
 
-            return Result.Success<IEnumerable<QuestionResponse>>(questions);
 
+
+            if (!String.IsNullOrEmpty(request.SearchValue))
+                query = query.Where(P => P.Content.Contains(request.SearchValue));
+
+
+            if (!String.IsNullOrEmpty(request.SortColumn))
+                query = query.OrderBy($"{request.SortColumn} {request.SortDirection}");
+
+
+            var source = query
+             .Include(Q => Q.Answers)
+             .ProjectToType<QuestionResponse>()
+             .AsNoTracking();
+
+            var response = await PageinatedList<QuestionResponse>.CreateAsync(source, request.pageSize, request.pageNumber, cancellationToken);
+
+            return Result.Success(response);
 
         }
 
@@ -50,7 +65,7 @@ namespace SurveyBasket.Services
 
             var cachKey = $"{prefixmemorycash}-{Pollid}";
 
-           
+
 
 
 
@@ -58,7 +73,7 @@ namespace SurveyBasket.Services
 
                 cachKey,
                  async CashEntry => await _context.Questions
-                 
+
                  .Where(P => P.PollId == Pollid && P.IsActive)
                  .Include(Q => Q.Answers)
                  .Select(Q => new QuestionResponse(
@@ -101,14 +116,14 @@ namespace SurveyBasket.Services
         {
             var PollIsExist = await _context.Polls.AnyAsync(P => P.Id == Pollid);
             if (!PollIsExist)
-               return Result.Failure<QuestionResponse>(PollErrors.PollNotFound);
+                return Result.Failure<QuestionResponse>(PollErrors.PollNotFound);
             var questionIsExist = await _context.Questions.AnyAsync(Q => Q.Content == request.Content && Q.PollId == Pollid);
             if (questionIsExist)
                 return Result.Failure<QuestionResponse>(QuestionErrors.DublicateContent);
 
             var question = request.Adapt<Question>();
             question.PollId = Pollid;
-           await _context.Questions.AddAsync(question , cancellationToken);
+            await _context.Questions.AddAsync(question, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
 
@@ -147,7 +162,7 @@ namespace SurveyBasket.Services
 
             answer.IsActive = request.Answers.Contains(answer.Content)
             );
-                     
+
 
             await _context.SaveChangesAsync(cancellationToken);
             await _hybridCache.RemoveAsync($"{prefixmemorycash}-{Pollid}", cancellationToken);
@@ -167,5 +182,5 @@ namespace SurveyBasket.Services
         }
 
     }
-   
+
 }

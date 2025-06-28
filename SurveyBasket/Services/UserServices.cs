@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic;
+using SurveyBasket.Contracts.Common;
 using SurveyBasket.Contracts.User;
 using SurveyBasket.Presistence.DbContextt;
 
@@ -13,23 +14,24 @@ namespace SurveyBasket.Services
         private readonly UserManager<ApplicationUser> _userManager = userManager;
         private readonly IRoleServices _roleServices = roleServices;
 
-        public async Task<IEnumerable<UserResponse>> Getallasync(CancellationToken cancellationToken = default) =>
-            await (from u in _context.Users
-                   join ur in _context.UserRoles
-                   on u.Id equals ur.UserId
-                   join r in _context.Roles
-                   on ur.RoleId equals r.Id into roles
-                   where !roles.Any(x => x.Name == RoleDefault.Member)
-                   select new
-                   {
+        public async Task<PageinatedList<UserResponse>> Getallasync(FilterRequest filter, CancellationToken cancellationToken = default)
+        {
+          var users =  (from u in _context.Users
+             join ur in _context.UserRoles
+             on u.Id equals ur.UserId
+             join r in _context.Roles
+             on ur.RoleId equals r.Id into roles
+             where !roles.Any(x => x.Name == RoleDefault.Member)
+             select new
+             {
 
-                       u.Id,
-                       u.FirstName,
-                       u.LastName,
-                       u.Email,
-                       u.IsDisable,
-                       roles = roles.Select(x => x.Name!).ToList()
-                   }
+                 u.Id,
+                 u.FirstName,
+                 u.LastName,
+                 u.Email,
+                 u.IsDisable,
+                 roles = roles.Select(x => x.Name!).ToList()
+             }
                    ).GroupBy(u => new { u.Id, u.FirstName, u.LastName, u.Email, u.IsDisable })
                     .Select(u => new UserResponse(
 
@@ -41,8 +43,13 @@ namespace SurveyBasket.Services
                        u.SelectMany(u => u.roles)
 
                        )
-                   ).ToListAsync(cancellationToken);
+                   );
 
+            var response = await PageinatedList<UserResponse>.CreateAsync( users, filter.pageSize , filter.pageNumber, cancellationToken );
+
+            return response;
+
+        }
         public async Task<Result<UserResponse>> getAsync(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
