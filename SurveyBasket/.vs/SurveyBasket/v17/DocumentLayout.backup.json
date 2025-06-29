@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "F:\\SurveyBasket\\SurveyBasket\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{3EEF20D9-BD62-42F8-9A0F-0763D5DEBAC6}|SurveyBasket.csproj|f:\\surveybasket\\surveybasket\\dependancyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EEF20D9-BD62-42F8-9A0F-0763D5DEBAC6}|SurveyBasket.csproj|solutionrelative:dependancyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3EEF20D9-BD62-42F8-9A0F-0763D5DEBAC6}|SurveyBasket.csproj|f:\\surveybasket\\surveybasket\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3EEF20D9-BD62-42F8-9A0F-0763D5DEBAC6}|SurveyBasket.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3EEF20D9-BD62-42F8-9A0F-0763D5DEBAC6}|SurveyBasket.csproj|f:\\surveybasket\\surveybasket\\services\\questionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3EEF20D9-BD62-42F8-9A0F-0763D5DEBAC6}|SurveyBasket.csproj|solutionrelative:services\\questionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -123,10 +131,6 @@
       "RelativeMoniker": "D:0:0:{3EEF20D9-BD62-42F8-9A0F-0763D5DEBAC6}|SurveyBasket.csproj|solutionrelative:errors\\usererror.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3EEF20D9-BD62-42F8-9A0F-0763D5DEBAC6}|SurveyBasket.csproj|f:\\surveybasket\\surveybasket\\dependancyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3EEF20D9-BD62-42F8-9A0F-0763D5DEBAC6}|SurveyBasket.csproj|solutionrelative:dependancyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3EEF20D9-BD62-42F8-9A0F-0763D5DEBAC6}|SurveyBasket.csproj|f:\\surveybasket\\surveybasket\\errors\\autherrors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3EEF20D9-BD62-42F8-9A0F-0763D5DEBAC6}|SurveyBasket.csproj|solutionrelative:errors\\autherrors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -225,10 +229,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\SurveyBasket\\SurveyBasket\\Presistence\\Migrations\\20250621123125_seed identity Default Data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Presistence\\Migrations\\20250621123125_seed identity Default Data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3EEF20D9-BD62-42F8-9A0F-0763D5DEBAC6}|SurveyBasket.csproj|f:\\surveybasket\\surveybasket\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3EEF20D9-BD62-42F8-9A0F-0763D5DEBAC6}|SurveyBasket.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3EEF20D9-BD62-42F8-9A0F-0763D5DEBAC6}|SurveyBasket.csproj|f:\\surveybasket\\surveybasket\\presistence\\entitesconfiguration\\pollconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -437,33 +437,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "VotesController.cs",
-              "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Controllers\\VotesController.cs",
-              "RelativeDocumentMoniker": "Controllers\\VotesController.cs",
-              "ToolTip": "F:\\SurveyBasket\\SurveyBasket\\Controllers\\VotesController.cs",
-              "RelativeToolTip": "Controllers\\VotesController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-28T12:01:23.371Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "QuestionsController.cs",
-              "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Controllers\\QuestionsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\QuestionsController.cs",
-              "ToolTip": "F:\\SurveyBasket\\SurveyBasket\\Controllers\\QuestionsController.cs",
-              "RelativeToolTip": "Controllers\\QuestionsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T12:46:23.639Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "PollServices.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Services\\PollServices.cs",
               "RelativeDocumentMoniker": "Services\\PollServices.cs",
@@ -476,7 +450,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "ResultsController.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Controllers\\ResultsController.cs",
               "RelativeDocumentMoniker": "Controllers\\ResultsController.cs",
@@ -489,7 +463,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "AuthController.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
@@ -502,7 +476,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "FilterRequest.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Contracts\\Common\\FilterRequest.cs",
               "RelativeDocumentMoniker": "Contracts\\Common\\FilterRequest.cs",
@@ -515,20 +489,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "QuestionService.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Services\\QuestionService.cs",
               "RelativeDocumentMoniker": "Services\\QuestionService.cs",
-              "ToolTip": "F:\\SurveyBasket\\SurveyBasket\\Services\\QuestionService.cs*",
-              "RelativeToolTip": "Services\\QuestionService.cs*",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "ToolTip": "F:\\SurveyBasket\\SurveyBasket\\Services\\QuestionService.cs",
+              "RelativeToolTip": "Services\\QuestionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-16T08:11:39.614Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "IQuestionService.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Services\\Abstractions\\IQuestionService.cs",
               "RelativeDocumentMoniker": "Services\\Abstractions\\IQuestionService.cs",
@@ -541,7 +515,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
+              "Title": "DependancyInjection.cs",
+              "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\DependancyInjection.cs",
+              "RelativeDocumentMoniker": "DependancyInjection.cs",
+              "ToolTip": "F:\\SurveyBasket\\SurveyBasket\\DependancyInjection.cs*",
+              "RelativeToolTip": "DependancyInjection.cs*",
+              "ViewState": "AgIAACsAAAAAAAAAAAAgwFEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T06:21:22.986Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "F:\\SurveyBasket\\SurveyBasket\\Program.cs*",
+              "RelativeToolTip": "Program.cs*",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAkwGEAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T08:03:52.488Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "QuestionsController.cs",
+              "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Controllers\\QuestionsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\QuestionsController.cs",
+              "ToolTip": "F:\\SurveyBasket\\SurveyBasket\\Controllers\\QuestionsController.cs",
+              "RelativeToolTip": "Controllers\\QuestionsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T12:46:23.639Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "VotesController.cs",
+              "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Controllers\\VotesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\VotesController.cs",
+              "ToolTip": "F:\\SurveyBasket\\SurveyBasket\\Controllers\\VotesController.cs",
+              "RelativeToolTip": "Controllers\\VotesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T12:01:23.371Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "IpollServices.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Services\\Abstractions\\IpollServices.cs",
               "RelativeDocumentMoniker": "Services\\Abstractions\\IpollServices.cs",
@@ -554,7 +580,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "PollsController.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Controllers\\PollsController.cs",
               "RelativeDocumentMoniker": "Controllers\\PollsController.cs",
@@ -567,7 +593,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "AccountController.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
@@ -580,7 +606,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "UsersController.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
@@ -593,7 +619,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "EmailServices.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Services\\EmailServices.cs",
               "RelativeDocumentMoniker": "Services\\EmailServices.cs",
@@ -606,7 +632,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "UserServices.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Services\\UserServices.cs",
               "RelativeDocumentMoniker": "Services\\UserServices.cs",
@@ -619,7 +645,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "PageinatedList.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Abstractions\\PageinatedList.cs",
               "RelativeDocumentMoniker": "Abstractions\\PageinatedList.cs",
@@ -632,7 +658,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "EmailSettings.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Options\\EmailSettings.cs",
               "RelativeDocumentMoniker": "Options\\EmailSettings.cs",
@@ -645,7 +671,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "Result.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Abstractions\\Result.cs",
               "RelativeDocumentMoniker": "Abstractions\\Result.cs",
@@ -658,7 +684,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "IUserServices.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Services\\Abstractions\\IUserServices.cs",
               "RelativeDocumentMoniker": "Services\\Abstractions\\IUserServices.cs",
@@ -671,7 +697,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "FilterClass.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Contracts\\Common\\FilterClass.cs",
               "RelativeDocumentMoniker": "Contracts\\Common\\FilterClass.cs",
@@ -684,7 +710,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "UserResponse.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Contracts\\User\\UserResponse.cs",
               "RelativeDocumentMoniker": "Contracts\\User\\UserResponse.cs",
@@ -697,7 +723,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "RoleServices.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Services\\RoleServices.cs",
               "RelativeDocumentMoniker": "Services\\RoleServices.cs",
@@ -710,7 +736,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 26,
               "Title": "UpdateUserRequest.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Contracts\\User\\UpdateUserRequest.cs",
               "RelativeDocumentMoniker": "Contracts\\User\\UpdateUserRequest.cs",
@@ -723,7 +749,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 27,
               "Title": "UpdateUserRequestValidator.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Contracts\\User\\UpdateUserRequestValidator.cs",
               "RelativeDocumentMoniker": "Contracts\\User\\UpdateUserRequestValidator.cs",
@@ -736,7 +762,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "PermissionAuthPolicyProvider.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Authentication\\Filters\\PermissionAuthPolicyProvider.cs",
               "RelativeDocumentMoniker": "Authentication\\Filters\\PermissionAuthPolicyProvider.cs",
@@ -749,7 +775,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 24,
               "Title": "ApplicationUser.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Presistence\\Entites\\ApplicationUser.cs",
               "RelativeDocumentMoniker": "Presistence\\Entites\\ApplicationUser.cs",
@@ -762,7 +788,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 25,
               "Title": "CreateUserRequest.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Contracts\\User\\CreateUserRequest.cs",
               "RelativeDocumentMoniker": "Contracts\\User\\CreateUserRequest.cs",
@@ -775,7 +801,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 29,
               "Title": "MappingConfig.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Mapping\\MappingConfig.cs",
               "RelativeDocumentMoniker": "Mapping\\MappingConfig.cs",
@@ -788,7 +814,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 28,
               "Title": "CreateUserRequestValidator.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Contracts\\User\\CreateUserRequestValidator.cs",
               "RelativeDocumentMoniker": "Contracts\\User\\CreateUserRequestValidator.cs",
@@ -801,7 +827,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 30,
               "Title": "RoleDeatilsResponse.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Contracts\\Roles\\RoleDeatilsResponse.cs",
               "RelativeDocumentMoniker": "Contracts\\Roles\\RoleDeatilsResponse.cs",
@@ -814,7 +840,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "RoleRequest.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Contracts\\Roles\\RoleRequest.cs",
               "RelativeDocumentMoniker": "Contracts\\Roles\\RoleRequest.cs",
@@ -827,7 +853,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 31,
               "Title": "UserError.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Errors\\UserError.cs",
               "RelativeDocumentMoniker": "Errors\\UserError.cs",
@@ -840,7 +866,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "AuthErrors.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Errors\\AuthErrors.cs",
               "RelativeDocumentMoniker": "Errors\\AuthErrors.cs",
@@ -853,7 +879,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "RolesController.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Controllers\\RolesController.cs",
               "RelativeDocumentMoniker": "Controllers\\RolesController.cs",
@@ -862,19 +888,6 @@
               "ViewState": "AgIAAB0AAAAAAAAAAAAUwC8AAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-24T13:00:53.999Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "DependancyInjection.cs",
-              "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\DependancyInjection.cs",
-              "RelativeDocumentMoniker": "DependancyInjection.cs",
-              "ToolTip": "F:\\SurveyBasket\\SurveyBasket\\DependancyInjection.cs",
-              "RelativeToolTip": "DependancyInjection.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAIBJwBkAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T06:21:22.986Z",
               "EditorCaption": ""
             },
             {
@@ -892,7 +905,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 42,
               "Title": "PollResponse.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Contracts\\Poll\\PollResponse.cs",
               "RelativeDocumentMoniker": "Contracts\\Poll\\PollResponse.cs",
@@ -905,7 +918,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "AuthService.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "Services\\AuthService.cs",
@@ -918,7 +931,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 41,
               "Title": "RoleResponse.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Contracts\\Roles\\RoleResponse.cs",
               "RelativeDocumentMoniker": "Contracts\\Roles\\RoleResponse.cs",
@@ -931,7 +944,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "IRoleServices.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Services\\Abstractions\\IRoleServices.cs",
               "RelativeDocumentMoniker": "Services\\Abstractions\\IRoleServices.cs",
@@ -944,7 +957,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "Permissions.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Abstractions\\Const\\Permissions.cs",
               "RelativeDocumentMoniker": "Abstractions\\Const\\Permissions.cs",
@@ -957,7 +970,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 39,
               "Title": "RoleError.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Errors\\RoleError.cs",
               "RelativeDocumentMoniker": "Errors\\RoleError.cs",
@@ -970,7 +983,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "RoleRequestValidator.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Contracts\\Roles\\RoleRequestValidator.cs",
               "RelativeDocumentMoniker": "Contracts\\Roles\\RoleRequestValidator.cs",
@@ -983,7 +996,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 40,
               "Title": "QuestionsError.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Errors\\QuestionsError.cs",
               "RelativeDocumentMoniker": "Errors\\QuestionsError.cs",
@@ -996,7 +1009,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 46,
               "Title": "JWTProvider.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Authentication\\JWTProvider.cs",
               "RelativeDocumentMoniker": "Authentication\\JWTProvider.cs",
@@ -1009,7 +1022,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 43,
               "Title": "PermissionAuthHandler.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Authentication\\Filters\\PermissionAuthHandler.cs",
               "RelativeDocumentMoniker": "Authentication\\Filters\\PermissionAuthHandler.cs",
@@ -1022,7 +1035,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 44,
               "Title": "PermissionsRequirement.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Authentication\\Filters\\PermissionsRequirement.cs",
               "RelativeDocumentMoniker": "Authentication\\Filters\\PermissionsRequirement.cs",
@@ -1035,7 +1048,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 45,
               "Title": "HasPermissionAttribute.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Authentication\\Filters\\HasPermissionAttribute.cs",
               "RelativeDocumentMoniker": "Authentication\\Filters\\HasPermissionAttribute.cs",
@@ -1048,7 +1061,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 47,
               "Title": "20250622152722_update type.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Presistence\\Migrations\\20250622152722_update type.cs",
               "RelativeDocumentMoniker": "Presistence\\Migrations\\20250622152722_update type.cs",
@@ -1059,7 +1072,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 52,
               "Title": "20250621123214_seed identity Default Data.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Presistence\\Migrations\\20250621123214_seed identity Default Data.cs",
               "RelativeDocumentMoniker": "Presistence\\Migrations\\20250621123214_seed identity Default Data.cs",
@@ -1070,7 +1083,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 55,
               "Title": "PermissionConfiguration.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Presistence\\EntitesConfiguration\\PermissionConfiguration.cs",
               "RelativeDocumentMoniker": "Presistence\\EntitesConfiguration\\PermissionConfiguration.cs",
@@ -1083,7 +1096,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 50,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Presistence\\DbContext\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Presistence\\DbContext\\ApplicationDbContext.cs",
@@ -1096,7 +1109,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 49,
               "Title": "RoleConfiguration.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Presistence\\EntitesConfiguration\\RoleConfiguration.cs",
               "RelativeDocumentMoniker": "Presistence\\EntitesConfiguration\\RoleConfiguration.cs",
@@ -1109,7 +1122,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 48,
               "Title": "RoleDefault.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Abstractions\\Const\\RoleDefault.cs",
               "RelativeDocumentMoniker": "Abstractions\\Const\\RoleDefault.cs",
@@ -1122,7 +1135,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 51,
               "Title": "IJWTprovider.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Authentication\\IJWTprovider.cs",
               "RelativeDocumentMoniker": "Authentication\\IJWTprovider.cs",
@@ -1135,7 +1148,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 53,
               "Title": "UserConfiguration.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Presistence\\EntitesConfiguration\\UserConfiguration.cs",
               "RelativeDocumentMoniker": "Presistence\\EntitesConfiguration\\UserConfiguration.cs",
@@ -1148,7 +1161,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 54,
               "Title": "UserRoleConfigration.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Presistence\\EntitesConfiguration\\UserRoleConfigration.cs",
               "RelativeDocumentMoniker": "Presistence\\EntitesConfiguration\\UserRoleConfigration.cs",
@@ -1161,7 +1174,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 56,
               "Title": "20250621123125_seed identity Default Data.cs",
               "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Presistence\\Migrations\\20250621123125_seed identity Default Data.cs",
               "RelativeDocumentMoniker": "Presistence\\Migrations\\20250621123125_seed identity Default Data.cs",
@@ -1204,19 +1217,6 @@
               "RelativeToolTip": "Presistence\\Migrations\\20250621122650_seed identity Default Data.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-21T12:26:50.428Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 56,
-              "Title": "Program.cs",
-              "DocumentMoniker": "F:\\SurveyBasket\\SurveyBasket\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "F:\\SurveyBasket\\SurveyBasket\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAowCkAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T08:03:52.488Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",

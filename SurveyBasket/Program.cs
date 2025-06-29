@@ -3,6 +3,7 @@ using FluentValidation;
 using Hangfire;
 using Hangfire.Dashboard;
 using HangfireBasicAuthenticationFilter;
+using HealthChecks.UI.Client;
 using Mapster;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
@@ -89,6 +90,15 @@ namespace SurveyBasket
 
             app.MapControllers();
             app.UseExceptionHandler();
+
+            app.MapHealthChecks("health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+            {
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+
+            });
+
+            
+               
 
             app.Run();
         }

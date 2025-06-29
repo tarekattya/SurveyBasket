@@ -10,6 +10,7 @@ using SurveyBasket.Options;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Hangfire;
 using SurveyBasket.Authentication.Filters;
+using SurveyBasket.Health;
 
 
 namespace SurveyBasket
@@ -29,6 +30,9 @@ namespace SurveyBasket
             services.AddScoped<IRoleServices, RoleServices>();
             services.AddScoped<IEmailSender, EmailServices>();
             services.AddScoped<INotifacitionServices, NotifacitionServices>();
+
+           
+
                     
             
 
@@ -40,7 +44,10 @@ namespace SurveyBasket
             services.AddDataBackGroundServices(configuration);
 
 
-
+            services.AddHealthChecks()
+              .AddSqlServer(name: "database", connectionString: configuration.GetConnectionString("DefaultConnection")!)
+              .AddHangfire(options => { options.MinimumAvailableServers = 1; })
+              .AddCheck<MailHealthCheck>(name:"mail service");
 
 
 
@@ -70,6 +77,8 @@ namespace SurveyBasket
             
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(ConnectionString));
+
+           
 
             return services;
         }
